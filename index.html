@@ -351,12 +351,12 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
 
 <section class="getit">
   <div class="wrap getit__in">
-    <div class="qr__box qr--lg" id="qr-handout"><p class="qr__wait">QR 產生中…</p></div>
+    <div class="qr__box qr--lg" id="qr-handout"><svg viewBox="0 0 29 29" shape-rendering="crispEdges" class="segno"><path fill="#fff" d="M0 0h29v29h-29z"/><path class="qrline" stroke="#000" d="M0 0.5h7m1 0h1m1 0h1m1 0h2m4 0h3m1 0h7m-29 1h1m5 0h1m1 0h2m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h2m2 0h3m1 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h2m2 0h3m2 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m4 0h1m1 0h1m5 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h2m2 0h1m1 0h1m2 0h2m1 0h1m-21 1h1m1 0h2m1 0h3m1 0h1m2 0h2m2 0h5m1 0h1m2 0h1m1 0h2m-28 1h4m3 0h3m2 0h1m2 0h1m2 0h1m1 0h4m3 0h1m-29 1h1m1 0h2m2 0h3m2 0h1m1 0h1m2 0h3m2 0h2m3 0h2m-28 1h1m1 0h3m3 0h2m2 0h1m6 0h1m3 0h1m4 0h1m-27 1h1m1 0h1m1 0h7m1 0h1m2 0h1m2 0h1m4 0h2m-26 1h5m2 0h2m2 0h1m1 0h3m2 0h2m1 0h1m3 0h3m-28 1h8m3 0h2m5 0h1m1 0h1m1 0h1m2 0h3m-28 1h1m3 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m4 0h2m2 0h1m-23 1h3m3 0h1m2 0h1m3 0h1m2 0h1m1 0h3m1 0h1m-27 1h1m1 0h1m3 0h4m1 0h1m1 0h2m2 0h1m4 0h1m1 0h3m-28 1h1m1 0h5m1 0h1m2 0h6m3 0h2m4 0h1m-24 1h1m4 0h11m1 0h2m1 0h1m2 0h1m-26 1h1m3 0h4m1 0h17m-19 1h2m1 0h1m6 0h3m3 0h5m-29 1h7m1 0h2m4 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m-28 1h1m5 0h1m1 0h8m3 0h2m3 0h2m1 0h2m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m4 0h2m1 0h5m1 0h1m-27 1h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m3 0h2m2 0h2m2 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m4 0h1m2 0h2m1 0h1m2 0h1m2 0h1m1 0h1m-29 1h1m5 0h1m2 0h1m5 0h1m2 0h1m1 0h4m1 0h1m1 0h1m-28 1h7m1 0h4m3 0h1m2 0h4m5 0h1"/></svg></div>
     <div class="getit__txt">
       <p class="getit__k">開始之前</p>
       <h2>用手機掃這張，把講義帶著走</h2>
       <p>掃完就能在自己的手機上打開這份講義。上課跟著做、回家再看一次，不用抄筆記。</p>
-      <p class="getit__note" id="qr-url"></p>
+      <p class="getit__note" id="qr-url">https://greenmail1011.github.io/gmap/</p>
     </div>
   </div>
 </section>
@@ -848,7 +848,7 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
          var HANDOUT_URL = 'https://你的帳號.github.io/gmap/';
        留空的話會自動抓「目前這一頁的網址」，放到哪就指到哪。
   --------------------------------------------------------------------- */
-  var HANDOUT_URL = '';
+  var HANDOUT_URL = "https://greenmail1011.github.io/gmap/";
 
   (function(){
     var box = document.getElementById('qr-handout');
