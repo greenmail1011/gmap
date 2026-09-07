@@ -117,6 +117,7 @@ main{padding:2.2rem 0 1rem}
 .card h3::before{content:"";width:.55rem;height:.55rem;border-radius:52% 52% 52% 2px;transform:rotate(-45deg);
   background:currentColor;flex:none}
 .steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:.85rem}
+.steps--air{gap:1.6rem}
 .steps>li{counter-increment:s;position:relative;padding-left:2.5rem;line-height:1.75;min-height:1.7rem}
 .steps>li::before{content:counter(s);position:absolute;left:0;top:.2rem;font-family:var(--f-num);font-weight:700;
   font-size:.85rem;width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;
@@ -125,18 +126,54 @@ main{padding:2.2rem 0 1rem}
   padding-left:.7rem;border-left:2px solid var(--accent-bg)}
 .see b{color:var(--accent)}
 .hint{display:block;color:var(--ink-3);font-size:.88rem;line-height:1.65;margin-top:.15rem}
-.bad{display:block;margin-top:.45rem;background:var(--bad-bg);border-radius:.6rem;padding:.5rem .7rem .5rem .65rem;
+.bad{display:block;margin-top:.7rem;background:var(--bad-bg);border-radius:.7rem;padding:.75rem .9rem;
   font-size:.88rem;line-height:1.7;color:var(--ink-2)}
 .bad em{font-style:normal;display:block;font-family:var(--f-num);font-size:.68rem;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--bad);margin-bottom:.15rem}
+  letter-spacing:.14em;text-transform:uppercase;color:var(--bad);margin-bottom:.35rem}
 .bad span{display:block;padding-left:1.15rem;position:relative}
 .bad span::before{content:"✗";position:absolute;left:0;top:0;color:var(--bad);font-weight:700}
-.bad span+span{margin-top:.2rem}
+.bad span+span{margin-top:.35rem}
 .bad .ok{padding-left:1.15rem}
 .bad .ok::before{content:"✓";color:var(--extra)}
 .bad .ok b{color:var(--ink)}
 .video{margin-top:.9rem}
-.card .video{margin-top:0}
+.card .video{margin-top:1.6rem}
+.video--bad{background:var(--bad-bg);border:1px solid #F5C8D4;border-radius:.9rem;padding:.95rem}
+.video__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bad);margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.video__k::before{content:"✗";font-size:1.1em;line-height:1}
+.video--bad .video__frame{border-color:#F3C2CE;background:#fff}
+.video--bad .video__cap{color:var(--ink-2)}
+
+/* 儲存圖示 */
+.icn{width:1em;height:1em;flex:none}
+.ui--ic{display:inline-flex;align-items:center;gap:.3em;vertical-align:-.1em}
+.iconbox{margin-top:.95rem;background:var(--save-bg);border-radius:.85rem;padding:.9rem 1rem;
+  display:flex;flex-direction:column;gap:.75rem}
+.iconbox__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--save)}
+.iconrow{display:flex;align-items:center;gap:.9rem}
+.iconrow>svg{width:2.5rem;height:2.5rem;flex:none;color:var(--save)}
+.iconrow>div>b{display:block;font-size:.96rem;line-height:1.5}
+.iconrow em b{display:inline;font-weight:700;color:var(--ink)}
+
+/* 四個清單的圖示 */
+.lists{display:flex;flex-direction:column;gap:.8rem}
+.listrow{display:flex;align-items:flex-start;gap:.85rem}
+.listic{width:2.2rem;height:2.2rem;border-radius:.65rem;display:grid;place-items:center;flex:none;margin-top:.1rem}
+.listic svg{width:1.3rem;height:1.3rem}
+.listrow>div>b{display:block;font-size:.97rem;line-height:1.5}
+.listrow em{font-style:normal;display:block;font-size:.89rem;color:var(--ink-2);line-height:1.65}
+.listrow em b{color:var(--ink)}
+.ic-heart{background:#FFE6EC;color:#E13A5E}
+.ic-flag{background:#DDF3E7;color:#178F52}
+.ic-star{background:#FFF0D4;color:#CE8E00}
+.ic-trip{background:var(--prep-bg);color:var(--prep)}
+
+/* 手勢圖 */
+.gest{display:block;margin-top:.7rem;margin-bottom:.15rem;max-width:15.5rem;color:var(--accent)}
+.gest svg{display:block;width:100%;height:auto}
+.iconrow em{font-style:normal;display:block;font-size:.89rem;color:var(--ink-2);line-height:1.6}
 .video__frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:.8rem;overflow:hidden;
   background:var(--paper-2);border:1px solid var(--rule)}
 .video__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
@@ -280,9 +317,15 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
 
     <div class="card">
       <h3>三、學會三個手勢</h3>
-      <p class="hint" style="margin:-.4rem 0 .9rem">整堂課只會用到這三個動作。做不出來的時候，八成是下面那些狀況。</p>
-      <ol class="steps">
+      <p class="hint" style="margin:-.4rem 0 1.1rem">整堂課只會用到這三個動作。做不出來的時候，八成是下面那些狀況。</p>
+      <ol class="steps steps--air">
         <li><b>輕觸</b>　碰一下，馬上放開。
+          <span class="gest"><svg viewBox="0 0 200 120" aria-hidden="true">
+<rect x="8" y="10" width="184" height="100" rx="14" fill="#EEF4FD"/>
+<circle cx="100" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="2" opacity=".25"/>
+<circle cx="100" cy="60" r="23" fill="none" stroke="currentColor" stroke-width="2.5" opacity=".5"/>
+<circle cx="100" cy="60" r="13" fill="currentColor"/>
+</svg></span>
           <span class="bad"><em>做不出來通常是這樣</em>
             <span>手指停太久 —— 就變成「按住」了，地圖上會多一根你沒有要的圖釘。</span>
             <span>指甲點下去 —— 螢幕感應不到指甲，要用<b>指腹</b>。</span>
@@ -291,23 +334,50 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         </li>
         <li><b>按住</b>　手指壓著<b>不動</b>約一秒。
           <span class="see">地圖上會<b>掉下一根圖釘</b>。巷子裡的民宿、沒有店名的門口、停車的位置，都是靠這一招。</span>
+          <span class="gest"><svg viewBox="0 0 200 120" aria-hidden="true">
+<rect x="8" y="10" width="184" height="100" rx="14" fill="#EEF4FD"/>
+<circle cx="80" cy="64" r="40" fill="currentColor" opacity=".12"/>
+<circle cx="80" cy="64" r="27" fill="currentColor" opacity=".22"/>
+<circle cx="80" cy="64" r="14" fill="currentColor"/>
+<path d="M148 26v18" stroke="#E1443A" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3 5" opacity=".55"/>
+<g transform="translate(136,48)">
+<path d="M12 0a12 12 0 0 1 12 12c0 8.4-12 22-12 22S0 20.4 0 12A12 12 0 0 1 12 0z" fill="#E1443A"/>
+<circle cx="12" cy="12" r="4.4" fill="#fff"/>
+</g>
+</svg></span>
           <span class="bad"><em>做不出來通常是這樣</em>
             <span>壓不到一秒就放開 —— 那只是「輕觸」，圖釘不會出現。</span>
             <span>壓著的時候手指有滑到 —— 變成拖地圖，畫面整個跑掉，圖釘也不會出現。</span>
             <span class="ok"><b>正確：</b>壓下去、心裡數「一、二」，看到圖釘掉下來才放手。</span>
           </span>
         </li>
-        <li><b>向右滑</b>　手指放在<b>那排按鈕上</b>，水平往右撥。
-          <span class="see">那排按鈕會捲動，<b>後面還藏著更多按鈕</b>。找不到某顆按鈕時就用這招。</span>
+        <li><b>撥按鈕</b>　手指壓在<b>那排按鈕上面</b>，左右撥。
+          <span class="see">那排按鈕<b>裝不下、有幾顆被擠到畫面外</b>。手指撥一下，它們就像轉盤一樣移進來。<br>
+            找不到「標籤」「更多」的時候，十次有九次是它們躲在後面，不是你的手機沒有。</span>
+          <span class="gest"><svg viewBox="0 0 200 120" aria-hidden="true">
+<defs><clipPath id="gcard"><rect x="8" y="10" width="184" height="100" rx="14"/></clipPath></defs>
+<rect x="8" y="10" width="184" height="100" rx="14" fill="#EEF4FD"/>
+<g clip-path="url(#gcard)">
+<rect x="18" y="36" width="44" height="26" rx="13" fill="#fff" stroke="#D3E1F3" stroke-width="1.5"/>
+<rect x="68" y="36" width="44" height="26" rx="13" fill="#fff" stroke="#D3E1F3" stroke-width="1.5"/>
+<rect x="118" y="36" width="44" height="26" rx="13" fill="#fff" stroke="#D3E1F3" stroke-width="1.5"/>
+<rect x="168" y="36" width="44" height="26" rx="13" fill="#fff" stroke="#D3E1F3" stroke-width="1.5"/>
+</g>
+<circle cx="90" cy="49" r="14" fill="currentColor" opacity=".92"/>
+<path d="M58 90h84" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+<path d="M66 82l-9 8 9 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M134 82l9 8-9 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span>
           <span class="bad"><em>做不出來通常是這樣</em>
-            <span>從按鈕上方的空白處滑 —— 那是在拖地圖，按鈕不會動。</span>
-            <span>往上滑 —— 卡片會整張被拉開或收起來，不是你要的。</span>
-            <span class="ok"><b>正確：</b>手指壓在按鈕本身，往右邊平平地撥過去。</span>
+            <span>手指放在按鈕<b>上方的空白處</b>撥 —— 那是在拖地圖，按鈕不會動。</span>
+            <span>往上或往下撥 —— 整張卡片會被拉開或收起來，不是你要的。</span>
+            <span class="ok"><b>正確：</b>手指要<b>壓在按鈕本身</b>，左右平平地撥。</span>
           </span>
         </li>
       </ol>
 
-      <div class="video">
+      <div class="video video--bad">
+        <p class="video__k">點擊錯誤示範</p>
         <div class="video__frame">
           <iframe src="https://www.youtube-nocookie.com/embed/gIpYMHH2X3A?rel=0"
                   title="如何在 Google map 上儲存地址"
@@ -315,7 +385,7 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
-        <p class="video__cap">影片示範：〈如何在 Google map 上儲存地址〉／David Lin。<br>
+        <p class="video__cap">影片來源：〈如何在 Google map 上儲存地址〉／David Lin。<br>
           看不到播放器的話，<a href="https://www.youtube.com/watch?v=gIpYMHH2X3A" target="_blank" rel="noopener">點這裡在 YouTube 開啟</a>。</p>
       </div>
     </div>
@@ -342,20 +412,51 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         <li>輕觸畫面<b>底部</b>的地點名稱或地址。
           <span class="see">畫面下方會<b>滑出一張卡片</b>，上面有店名、評分，還有一排按鈕。</span>
         </li>
-        <li>在那排按鈕裡找到 <span class="ui">儲存</span>，輕觸它。
-          <span class="see">跳出清單讓你挑，<b>選一個就完成了</b>。按鈕會變成實心，代表已經存起來。</span>
+        <li>在那排按鈕裡找到 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11a1 1 0 0 1 1 1v17l-6.5-4-6.5 4V4a1 1 0 0 1 1-1z"/></svg>儲存</span>，輕觸它。
+          <span class="see">跳出清單讓你挑，<b>選一個就完成了</b>。</span>
         </li>
       </ol>
+
+      <div class="iconbox">
+        <p class="iconbox__k">認這個圖示就對了</p>
+        <div class="iconrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11a1 1 0 0 1 1 1v17l-6.5-4-6.5 4V4a1 1 0 0 1 1-1z"/></svg>
+          <div>
+            <b>還沒存</b>
+            <em>圖示是<b>空心</b>的，只有一圈外框。下面的字寫「儲存」。</em>
+          </div>
+        </div>
+        <div class="iconrow">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 3h11a1 1 0 0 1 1 1v17l-6.5-4-6.5 4V4a1 1 0 0 1 1-1z"/></svg>
+          <div>
+            <b>存好了</b>
+            <em>圖示變成<b>實心</b>、整個填滿顏色，下面的字會換成你選的清單名稱。</em>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="card">
       <h3>一開始就有的四個清單</h3>
-      <ol class="steps">
-        <li><span class="ui">喜愛的地點</span>　常去、確定會再去的地方。</li>
-        <li><span class="ui">想去的地點</span>　還沒去過、聽人家推薦的。<span class="hint">出發前規劃就丟這裡，最順手。</span></li>
-        <li><span class="ui">已加星號的地點</span>　重要、要優先處理的。</li>
-        <li><span class="ui">旅遊計畫</span>　這趟行程專用。</li>
-      </ol>
+      <p class="hint" style="margin:-.4rem 0 .95rem">存進哪一個清單，地圖上就會用哪個符號標出來。不用點進清單，看一眼地圖就知道。</p>
+      <div class="lists">
+        <div class="listrow">
+          <span class="listic ic-heart"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.7C9.9 19.1 3.3 14.6 3.3 10.2A4.7 4.7 0 0 1 12 7.6a4.7 4.7 0 0 1 8.7 2.6c0 4.4-6.6 8.9-8.7 10.5z"/></svg></span>
+          <div><b>喜愛的地點</b><em>常去、確定會再去的地方。地圖上是<b>愛心</b>。</em></div>
+        </div>
+        <div class="listrow">
+          <span class="listic ic-flag"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.6 3a1 1 0 0 1 1 1v17a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1z"/><path d="M8 4.6h9.6a.7.7 0 0 1 .58 1.09L16.4 8.3l1.78 2.6a.7.7 0 0 1-.58 1.1H8z"/></svg></span>
+          <div><b>想去的地點</b><em>還沒去過、聽人家推薦的。地圖上是<b>旗子</b>。出發前規劃就丟這裡，最順手。</em></div>
+        </div>
+        <div class="listrow">
+          <span class="listic ic-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l2.7 5.5 6 .87-4.35 4.24 1.03 6.02L12 16.79 6.62 19.63l1.03-6.02L3.3 9.37l6-.87z"/></svg></span>
+          <div><b>已加星號的地點</b><em>重要、要優先處理的。地圖上是<b>星星</b>。</em></div>
+        </div>
+        <div class="listrow">
+          <span class="listic ic-trip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.8 7.6h14.4a2 2 0 0 1 2 2v8.4a2 2 0 0 1-2 2H4.8a2 2 0 0 1-2-2V9.6a2 2 0 0 1 2-2z"/><path d="M9.2 7.2V5.9c0-.72.58-1.3 1.3-1.3h3c.72 0 1.3.58 1.3 1.3v1.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+          <div><b>旅遊計畫</b><em>這趟行程專用。這個清單的圖示會隨版本不同，以你手機上看到的為準。</em></div>
+        </div>
+      </div>
     </div>
 
     <div class="find">
@@ -391,7 +492,7 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         <li>打開 <span class="ui">Google 地圖</span>。</li>
         <li>搜尋地址，或在地圖上<b>按住</b>那個位置放下圖釘。</li>
         <li>輕觸畫面<b>底部</b>的地點名稱。
-          <span class="see">卡片滑出來，那排按鈕裡會有一顆 <b>標籤</b>。看不到就在按鈕上<b>往右滑</b>。</span>
+          <span class="see">卡片滑出來，那排按鈕裡會有一顆 <b>標籤</b>。看不到就在那排按鈕上<b>左右撥</b>，它會移進來。</span>
         </li>
         <li>輕觸 <span class="ui">標籤</span>，打上你自己的叫法，例如「阿姨家」，然後存起來。</li>
       </ol>
@@ -524,7 +625,7 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         <li>搜尋你要去的地方，例如「京都市」。</li>
         <li>輕觸畫面底部的地點名稱，把卡片叫出來。</li>
         <li>找到 <span class="ui">更多</span>（三個點）。
-          <span class="see">如果那排按鈕上看不到它，在按鈕上<b>往右滑</b>，它通常排在最後面。</span>
+          <span class="see">如果那排按鈕上看不到它，在按鈕上<b>左右撥</b>，它通常排在最後面。</span>
         </li>
         <li>輕觸 <span class="ui">下載離線地圖</span><span class="sep">›</span><span class="ui">下載</span>。
           <span class="see">畫面會顯示<b>要佔多少空間</b>，下載中可以先做別的事。</span>
@@ -610,10 +711,10 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
   <div class="faq">
     <div><h3>存過的地點通通不見了</h3><p>先看右上角是不是自己的大頭貼。換手機、或不小心登入另一個 Google 帳號，清單就會看起來「空的」。登回原本那個帳號，東西就都在。</p></div>
     <div><h3>找不到「已加上標籤」</h3><p>在 <span class="ui">個人中心</span> 那一頁<b>往下捲</b>，它排在「你的清單」附近。第一次用的人常常只看畫面上半部就放棄了。</p></div>
-    <div><h3>那排按鈕裡沒有我要的那一顆</h3><p>在按鈕上<b>往右滑</b>。那排是可以捲動的，後面通常還藏著「標籤」「更多」等按鈕。</p></div>
+    <div><h3>那排按鈕裡沒有我要的那一顆</h3><p>手指壓在<b>那排按鈕上面</b>左右撥。那一排裝不下，有幾顆被擠到畫面外，撥一下就會移進來——「標籤」「更多」常常躲在後面。</p></div>
     <div><h3>打了標籤的名字，搜尋卻找不到</h3><p>兩個原因：一是沒登入同一個帳號；二是名字打錯字。可以先到 <span class="ui">個人中心</span> › <span class="ui">已加上標籤</span> 確認你當初取的到底叫什麼。</p></div>
     <div><h3>清單傳給別人，會被亂改嗎？</h3><p>不會。除非你另外開了 <span class="ui">讓其他人編輯這份清單</span>，否則對方只能看。想收回隨時把它關掉就好。</p></div>
-    <div><h3>那個地方沒有店名，怎麼存？</h3><p>用<b>按住</b>：手指壓在地圖上那個位置約一秒，掉下一根圖釘，再輕觸畫面底部就能 <span class="ui">儲存</span> 或加 <span class="ui">標籤</span>。民宿門口、停車位都用這招。</p></div>
+    <div><h3>那個地方沒有店名，怎麼存？</h3><p>用<b>按住</b>：手指壓在地圖上那個位置約一秒，掉下一根圖釘，再輕觸畫面底部就能 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11a1 1 0 0 1 1 1v17l-6.5-4-6.5 4V4a1 1 0 0 1 1-1z"/></svg>儲存</span> 或加 <span class="ui">標籤</span>。民宿門口、停車位都用這招。</p></div>
   </div>
 </section>
 
