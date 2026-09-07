@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#DCEDFF">
+<meta name="description" content="Google 地圖儲存與標籤教學講義，iOS／Android 雙系統對照操作示意圖。">
+<style>*{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Google 地圖存點課</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@500;600;700;800&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#F7FAFF; --paper-2:#EAF3FF; --surface:#FFFFFF;
+  --ink:#1A2C54; --ink-2:#546A90; --ink-3:#93A5C2;
+  --rule:#DDE9FA; --rule-soft:#EDF4FE;
+  --save:#1E7BF5; --save-bg:#E4F0FF; --save-v:#5C9BFF;
+  --label:#0AA5CE; --label-bg:#DCF4FC; --label-v:#3FC4EE;
+  --extra:#6E5DF6; --extra-bg:#EDEAFF; --extra-v:#9A8FFF;
+  --prep:#4A79C9; --prep-bg:#E8F0FC; --prep-v:#8FB0E4;
+  --hero:linear-gradient(150deg,#DCEDFF 0%,#EFF7FF 44%,#FFFFFF 100%);
+  --ph-bd:#D6E4F7; --ph-bg:#FFFFFF; --ph-ink:#1A2C54; --ph-ink2:#7B90B2; --ph-chip:#F0F6FE; --ph-map:#EAF2FC; --ph-road:#FFFFFF; --ph-pin:#1E7BF5;
+  --shadow:0 1px 2px rgba(26,44,84,.04), 0 12px 26px -18px rgba(26,44,84,.3);
+  --f-disp:"Noto Sans TC",'PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --f-body:"Noto Sans TC",'PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --f-num:"Outfit","Noto Sans TC",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{font-size:17px;-webkit-text-size-adjust:100%}
+@media (min-width:720px){html{font-size:18px}}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-size:1rem; line-height:1.8;
+  font-weight:400; letter-spacing:.01em;
+}
+h1,h2,h3,h4{margin:0; text-wrap:balance; font-family:var(--f-disp); font-weight:700; line-height:1.35}
+p{margin:0}
+ol,ul{margin:0;padding:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--extra); outline-offset:3px; border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.wrap{max-width:47rem;margin:0 auto;padding:0 1.15rem}
+
+/* ---------- hero ---------- */
+.hero{background:var(--hero);color:var(--ink);position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:auto -12% -55% auto;width:26rem;height:26rem;border-radius:50%;
+  background:radial-gradient(circle,rgba(31,111,235,.16) 0%,rgba(31,111,235,0) 70%);pointer-events:none
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+  background:linear-gradient(90deg,var(--save) 0 34%,var(--label) 34% 67%,var(--extra) 67% 100%)
+}
+.hero .wrap{padding-top:2.6rem;padding-bottom:2.1rem;position:relative;z-index:1}
+.eyebrow{
+  font-family:var(--f-num);font-size:.78rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:.7rem
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+h1{font-size:clamp(2rem,7.4vw,3.1rem);font-weight:900;margin:.65rem 0 .6rem;letter-spacing:-.025em;color:var(--ink)}
+.lede{color:var(--ink-2);font-size:1.03rem;max-width:32rem;font-weight:400}
+.legend{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.legend li{
+  display:flex;align-items:center;gap:.5rem;background:var(--surface);
+  border:1px solid var(--rule);border-radius:2rem;padding:.34rem .95rem .34rem .62rem;
+  font-size:.87rem;font-weight:500;color:var(--ink-2);box-shadow:var(--shadow)
+}
+.dot{width:.78rem;height:.78rem;border-radius:52% 52% 52% 3px;transform:rotate(-45deg);flex:none}
+.dot--save{background:var(--save)} .dot--label{background:var(--label)} .dot--extra{background:var(--extra)}
+
+/* ---------- sticky bar ---------- */
+.bar{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--rule)}
+@supports (backdrop-filter:blur(6px)){.bar{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px)}}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .9rem;padding-top:.6rem;padding-bottom:.6rem}
+.seg{display:flex;background:var(--paper-2);border:1px solid var(--rule);border-radius:.6rem;padding:.15rem;gap:.15rem}
+.seg button{
+  font:inherit;font-weight:700;font-size:.9rem;border:0;cursor:pointer;color:var(--ink-2);
+  background:transparent;border-radius:.45rem;padding:.38rem .85rem;line-height:1.2
+}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.meter{display:flex;align-items:center;gap:.5rem;font-size:.84rem;color:var(--ink-2);margin-left:auto}
+.meter__track{width:5.5rem;height:.4rem;border-radius:1rem;background:var(--rule);overflow:hidden}
+.meter__fill{height:100%;width:0;background:var(--extra);border-radius:1rem;transition:width .3s ease}
+.meter b{font-family:var(--f-num);font-variant-numeric:tabular-nums;color:var(--ink);font-weight:700}
+.tnote-btn{
+  font:inherit;font-size:.84rem;font-weight:500;cursor:pointer;color:var(--ink-2);
+  background:transparent;border:1px solid var(--rule);border-radius:.5rem;padding:.3rem .65rem
+}
+.tnote-btn[aria-pressed="true"]{background:var(--extra-bg);color:var(--extra);border-color:transparent;font-weight:700}
+
+/* ---------- units ---------- */
+main{padding:2.2rem 0 1rem}
+.unit{position:relative;padding-left:3.1rem;padding-bottom:2.6rem}
+.unit::before{
+  content:"";position:absolute;left:.95rem;top:2.9rem;bottom:.4rem;width:0;
+  border-left:2px dashed var(--rule)
+}
+.unit:last-of-type::before{display:none}
+.pin{box-shadow:0 6px 14px -5px var(--accent);
+  position:absolute;left:0;top:.2rem;width:2rem;height:2rem;flex:none;
+  border-radius:52% 52% 52% 5px;transform:rotate(-45deg);
+  background:var(--accent);display:grid;place-items:center
+}
+.pin span{transform:rotate(45deg);font-family:var(--f-num);font-weight:700;font-size:.95rem;color:var(--surface)}
+.unit--prep{--accent:var(--prep);--accent-bg:var(--prep-bg)}
+.unit--save{--accent:var(--save);--accent-bg:var(--save-bg)}
+.unit--label{--accent:var(--label);--accent-bg:var(--label-bg)}
+.unit--extra{--accent:var(--extra);--accent-bg:var(--extra-bg)}
+.unit__kicker{font-family:var(--f-num);font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.unit h2{font-size:clamp(1.38rem,4.7vw,1.78rem);font-weight:900;letter-spacing:-.015em;margin:.25rem 0 .5rem}
+.unit__why{color:var(--ink-2);font-size:.97rem;margin-bottom:1.15rem}
+.stack{display:flex;flex-direction:column;gap:1.15rem}
+
+.card{background:var(--surface);border:1px solid var(--rule-soft);border-radius:1rem;padding:1.15rem 1.2rem;box-shadow:var(--shadow)}
+.card h3{font-family:var(--f-body);font-size:.95rem;font-weight:700;letter-spacing:.02em;color:var(--accent);margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+.card h3::before{content:"";width:.55rem;height:.55rem;border-radius:52% 52% 52% 2px;transform:rotate(-45deg);background:currentColor;flex:none}
+
+.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:.8rem}
+.steps>li{counter-increment:s;position:relative;padding-left:2.5rem;line-height:1.75;min-height:1.7rem}
+.steps>li::before{
+  content:counter(s);position:absolute;left:0;top:.2rem;
+  font-family:var(--f-num);font-weight:700;font-size:.85rem;
+  width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;
+  background:var(--accent-bg);color:var(--accent)
+}
+.hint{display:block;color:var(--ink-3);font-size:.88rem;line-height:1.65;margin-top:.15rem}
+
+.ui{
+  display:inline-block;font-weight:700;font-size:.95em;padding:.1em .5em;
+  border-radius:.45em;background:var(--accent-bg);color:var(--accent);
+  white-space:nowrap
+}
+.ui--n{background:var(--paper-2);color:var(--ink)}
+.sep{color:var(--ink-3);padding:0 .25em;font-weight:400}
+
+.find{background:var(--extra-bg);border-radius:1rem;padding:1.05rem 1.2rem;border:1px solid transparent}
+.find h3{font-family:var(--f-body);font-size:.95rem;font-weight:700;color:var(--extra);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.find h3::before{content:"↩";font-family:var(--f-num);font-size:1rem;line-height:1}
+.find p{font-size:.97rem;line-height:1.75}
+.find .ui{background:var(--surface);color:var(--extra)}
+
+.teach{border-left:3px solid var(--extra-v);padding:.15rem 0 .15rem 1rem;color:var(--ink-2);font-size:.92rem;line-height:1.7}
+.teach strong{display:block;font-family:var(--f-num);font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.2rem}
+[data-teach="off"] .teach{display:none}
+[data-teach="off"] .teach-only{display:none}
+
+.check{display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.9rem;font-weight:500;color:var(--ink-2);user-select:none}
+.check input{accent-color:var(--extra);width:1.15rem;height:1.15rem;cursor:pointer}
+.check input:checked+span{color:var(--extra);font-weight:700}
+
+[data-plat="ios"] .and-only{display:none}
+[data-plat="android"] .ios-only{display:none}
+</style>
+<style>
+/* ---------- comparison + faq + footer ---------- */
+.block{padding:2.4rem 0;border-top:1px solid var(--rule)}
+.block__kicker{font-family:var(--f-num);font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.block h2{font-size:clamp(1.32rem,4.5vw,1.66rem);font-weight:900;letter-spacing:-.015em;margin:.3rem 0 .35rem}
+.block__sub{color:var(--ink-2);font-size:.95rem;margin-bottom:1.3rem}
+
+.vs{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:640px){.vs{grid-template-columns:1fr 1fr}}
+.vs>div{border-radius:.9rem;padding:1.1rem 1.2rem;border:1px solid var(--rule-soft);background:var(--surface);box-shadow:var(--shadow)}
+.vs h3{font-family:var(--f-body);font-size:1.02rem;font-weight:700;margin-bottom:.15rem}
+.vs .tag{font-family:var(--f-num);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.vs ul{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-top:.8rem;font-size:.94rem;line-height:1.65}
+.vs li{display:grid;grid-template-columns:.9rem 1fr;gap:.55rem}
+.vs li::before{content:"";width:.4rem;height:.4rem;border-radius:50%;margin-top:.62rem;background:currentColor;opacity:.55}
+.vs--save{color:var(--save)} .vs--label{color:var(--label)}
+.vs>div p,.vs>div li span{color:var(--ink)}
+.vs>div p{font-size:.93rem;color:var(--ink-2);margin-top:.5rem}
+
+.tbl-scroll{overflow-x:auto;border:1px solid var(--rule-soft);border-radius:.9rem;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:34rem;font-size:.92rem}
+th,td{text-align:left;padding:.75rem .9rem;border-bottom:1px solid var(--rule-soft);vertical-align:top;line-height:1.6}
+thead th{font-size:.78rem;font-family:var(--f-num);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:var(--paper-2)}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;white-space:nowrap}
+
+.faq{display:flex;flex-direction:column;gap:.7rem}
+.faq>div{background:var(--surface);border:1px solid var(--rule-soft);border-radius:.8rem;padding:.95rem 1.1rem}
+.faq h3{font-family:var(--f-body);font-size:.98rem;font-weight:700;margin-bottom:.35rem}
+.faq p{font-size:.93rem;color:var(--ink-2);line-height:1.72}
+.faq .ui{background:var(--paper-2);color:var(--ink)}
+
+.cheat{display:grid;gap:.6rem;grid-template-columns:1fr}
+@media (min-width:560px){.cheat{grid-template-columns:1fr 1fr}}
+.cheat div{background:var(--surface);border:1px solid var(--rule-soft);border-radius:.8rem;padding:.85rem 1rem;font-size:.93rem;line-height:1.6}
+.cheat b{display:block;font-size:.8rem;font-family:var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.25rem}
+
+footer{border-top:1px solid var(--rule);background:var(--paper-2);padding:1.8rem 0 3rem;color:var(--ink-3);font-size:.85rem;line-height:1.75}
+footer a{color:var(--ink-2);text-underline-offset:3px}
+footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
+</style>
+<style>
+/* ---------- 操作示意圖 ---------- */
+.shot{margin:1.1rem 0 0;display:flex;flex-direction:column;gap:.75rem}
+.shot__cap{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;font-size:.95rem;font-weight:700;color:var(--ink)}
+.shot__cap em{font-style:normal;font-family:var(--f-num);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.pair{display:grid;gap:.85rem;grid-template-columns:1fr}
+@media (min-width:500px){.pair{grid-template-columns:1fr 1fr}}
+.shot__note{font-size:.9rem;color:var(--ink-2);line-height:1.7;border-left:3px solid var(--accent-bg);padding-left:.85rem}
+.shot__note b{color:var(--ink)}
+
+.ph{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.ph__tag{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:.4rem}
+.ph__tag::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--ink-3);flex:none}
+.ph--and .ph__tag::before{background:var(--label)}
+.ph--ios .ph__tag::before{background:transparent;box-shadow:inset 0 0 0 2px var(--ink-3)}
+
+.ph__frame{position:relative;display:flex;flex-direction:column;overflow:hidden;
+  border:2px solid var(--ph-bd);border-radius:1.1rem;background:var(--ph-bg);
+  aspect-ratio:9/13;font-size:.7rem;line-height:1.45;color:var(--ph-ink)}
+.ph__top{display:flex;align-items:center;gap:.4rem;padding:.5rem;flex:none}
+.ph__search{flex:1;min-width:0;background:var(--ph-chip);border-radius:1rem;padding:.28rem .6rem;
+  color:var(--ph-ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.66rem}
+.ph__ava{width:1.45rem;height:1.45rem;border-radius:50%;background:var(--ph-chip);border:1px solid var(--ph-bd);
+  flex:none;display:grid;place-items:center;font-size:.58rem;color:var(--ph-ink2);font-weight:700}
+.ph__map{position:relative;flex:1;min-height:0;background:
+  linear-gradient(90deg,transparent 0 26%,var(--ph-road) 26% 31%,transparent 31%),
+  linear-gradient(0deg,transparent 0 44%,var(--ph-road) 44% 49%,transparent 49%),
+  linear-gradient(118deg,transparent 0 68%,var(--ph-road) 68% 71%,transparent 71%),
+  var(--ph-map)}
+.ph__mk{position:absolute;left:50%;top:34%;width:.9rem;height:.9rem;margin-left:-.45rem;
+  border-radius:52% 52% 52% 3px;transform:rotate(-45deg);background:var(--ph-pin)}
+.ph__hold{position:absolute;left:50%;top:52%;transform:translateX(-50%);background:var(--accent);color:#fff;
+  border-radius:1rem;padding:.12rem .5rem;font-size:.6rem;font-weight:700;white-space:nowrap}
+.ph__sheet{flex:none;background:var(--ph-bg);border-top:1px solid var(--ph-bd);padding:.55rem .6rem;
+  display:flex;flex-direction:column;gap:.28rem}
+.ph__sheet b{font-size:.78rem;font-weight:700;line-height:1.3}
+.ph__sub{color:var(--ph-ink2);font-size:.64rem}
+.ph__btns{display:flex;gap:.35rem;margin-top:.2rem;align-items:center}
+.ph__b{background:var(--ph-chip);border-radius:.9rem;padding:.22rem .55rem;font-size:.66rem;white-space:nowrap}
+.ph__field{background:var(--ph-chip);border-radius:.4rem;padding:.28rem .5rem;font-size:.68rem;
+  border-bottom:2px solid var(--accent);margin-top:.15rem}
+.ph__nav{flex:none;display:flex;border-top:1px solid var(--ph-bd);background:var(--ph-bg)}
+.ph__nav span{flex:1;text-align:center;padding:.42rem .1rem;font-size:.62rem;color:var(--ph-ink2);white-space:nowrap}
+.ph__list{flex:1;min-height:0;display:flex;flex-direction:column;gap:.28rem;padding:.5rem;overflow:hidden}
+.ph__hd{font-size:.64rem;font-weight:700;color:var(--ph-ink2);padding:.15rem .1rem 0}
+.ph__li{background:var(--ph-chip);border-radius:.5rem;padding:.32rem .5rem;font-size:.67rem;
+  display:flex;align-items:center;gap:.4rem;white-space:nowrap;overflow:hidden}
+.ph__li i{font-style:normal;color:var(--ph-ink2);font-size:.6rem;margin-left:auto}
+.ph__menu{position:absolute;right:.5rem;top:2.5rem;background:var(--ph-bg);border:1px solid var(--ph-bd);
+  border-radius:.55rem;padding:.25rem;display:flex;flex-direction:column;gap:.12rem;z-index:3;font-size:.66rem;
+  box-shadow:0 10px 22px -12px rgba(26,44,84,.26)}
+.ph__menu span{padding:.24rem .5rem;border-radius:.35rem;white-space:nowrap}
+.ph__swipe{background:var(--accent);color:#fff;border-radius:1rem;padding:.16rem .5rem;font-size:.62rem;
+  font-weight:700;white-space:nowrap;font-family:var(--f-body)}
+.ph__scroll{position:absolute;left:50%;transform:translateX(-50%);top:4.6rem;background:var(--accent);
+  color:#fff;border-radius:1rem;padding:.12rem .55rem;font-size:.6rem;font-weight:700;z-index:3;white-space:nowrap}
+
+.hl{position:relative;z-index:2;box-shadow:0 0 0 2px var(--accent),0 0 0 5px var(--accent-bg)}
+.ph__ava.hl{border-radius:50%}
+.ph__ava.hl[data-n]::after{right:auto;left:-.85em}
+.ph__nav .hl{border-radius:.4rem}
+.ph__swipe.hl{box-shadow:0 0 0 2px var(--accent),0 0 0 5px var(--accent-bg)}
+.hl[data-n]::after{content:attr(data-n);position:absolute;top:-.65em;right:-.65em;
+  width:1.4em;height:1.4em;border-radius:50%;background:var(--accent);color:#fff;
+  font-family:var(--f-num);font-weight:700;font-size:.78em;display:grid;place-items:center;line-height:1;z-index:4}
+
+/* --- 平台外觀差異 --- */
+.ph__os{flex:none;position:relative;display:flex;align-items:center;justify-content:space-between;
+  padding:.28rem .6rem .1rem;font-size:.56rem;font-weight:700;color:var(--ph-ink);letter-spacing:.02em}
+.ph__os .sig{opacity:.75;letter-spacing:.06em}
+.ph--ios .ph__frame{border-radius:1.7rem}
+.ph--and .ph__frame{border-radius:.95rem}
+.ph--ios .ph__os{padding-top:.34rem}
+.ph--ios .ph__os::after{content:"";position:absolute;left:50%;top:.22rem;transform:translateX(-50%);
+  width:3.1rem;height:.78rem;border-radius:1rem;background:#BCCADE;opacity:1}
+.ph__home{flex:none;display:grid;place-items:center;padding:.28rem 0 .32rem;background:var(--ph-bg)}
+.ph__home::after{content:"";height:.16rem;border-radius:1rem;background:var(--ink-3);opacity:.75;width:34%}
+.ph--and .ph__home::after{width:26%}
+.ph__back{flex:none;font-weight:700;color:var(--ph-ink2);font-size:.8rem;line-height:1;padding:0 .1rem}
+.ph__sheet{position:relative}
+.ph__grab{width:2.1rem;height:.2rem;border-radius:1rem;background:var(--ph-bd);margin:-.15rem auto .3rem}
+.ph--ios .ph__sheet{border-radius:.95rem .95rem 0 0;border-top:1px solid var(--ph-bd)}
+.ph__close{position:absolute;right:.45rem;top:.42rem;display:flex;gap:.28rem;z-index:2}
+.ph__close span{width:1.05rem;height:1.05rem;border-radius:50%;background:var(--ph-chip);
+  display:grid;place-items:center;font-size:.58rem;color:var(--ph-ink2);font-weight:700}
+
+/* --- 真實截圖插槽 --- */
+.ph__img{display:none;width:100%;border-radius:1.1rem;border:2px solid var(--ph-bd)}
+.ph__img.is-on{display:block}
+.shotlist{display:grid;gap:.5rem;grid-template-columns:1fr}
+@media (min-width:620px){.shotlist{grid-template-columns:1fr 1fr}}
+.shotlist div{background:var(--surface);border:1px solid var(--rule-soft);border-radius:.7rem;padding:.7rem .85rem;font-size:.9rem;line-height:1.6}
+#shots code{font-family:var(--f-num);font-size:.85rem;font-weight:700;color:var(--extra);background:var(--extra-bg);padding:.08em .42em;border-radius:.32em}
+.shotlist code{font-family:var(--f-num);font-size:.82rem;font-weight:700;color:var(--extra);background:var(--extra-bg);padding:.05em .4em;border-radius:.3em}
+</style>
+
+<style>
+/* ---------- QR ---------- */
+.getit{border-bottom:1px solid var(--rule);background:var(--paper-2)}
+.getit__in{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem 1.4rem;padding-top:1.5rem;padding-bottom:1.5rem}
+.getit__txt{flex:1 1 16rem;min-width:0}
+.getit__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--save)}
+.getit h2{font-size:clamp(1.2rem,4.2vw,1.5rem);font-weight:900;letter-spacing:-.015em;margin:.25rem 0 .4rem}
+.getit p{color:var(--ink-2);font-size:.96rem;line-height:1.7}
+.getit__note{margin-top:.5rem;font-family:var(--f-num);font-size:.76rem;color:var(--ink-3);word-break:break-all}
+.qr__box{background:#fff;border:1px solid var(--rule);border-radius:.8rem;padding:.7rem;
+  display:grid;place-items:center;box-shadow:var(--shadow)}
+.qr__box svg{display:block;width:100%;height:auto}
+.qr--lg{width:9.5rem;flex:none}
+.qr__wait{font-size:.78rem;color:var(--ink-3);text-align:center;line-height:1.5;padding:1.2rem .4rem}
+
+.apps{display:grid;gap:.9rem;grid-template-columns:1fr 1fr;margin-top:.2rem}
+.app{display:flex;flex-direction:column;gap:.45rem;min-width:0}
+.app .qr__box{width:100%;max-width:8.5rem}
+.app__tag{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;align-items:center;gap:.4rem}
+.app__tag::before{content:"";width:.5rem;height:.5rem;border-radius:50%;flex:none}
+.app--and .app__tag::before{background:var(--label)}
+.app--ios .app__tag::before{background:transparent;box-shadow:inset 0 0 0 2px var(--ink-3)}
+.app__note{font-size:.82rem;color:var(--ink-2);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="page" id="page" data-plat="android" data-teach="on">
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">iOS ／ Android 雙系統對照</p>
+    <h1>存起來，下次還找得到</h1>
+    <p class="lede">到一個不熟的地方，把想去的店、住的地方、停車的位置存進 Google 地圖，回家以後、明年再去，都還叫得出來。</p>
+    <ul class="legend">
+      <li><span class="dot dot--save"></span>清單：把地點收進資料夾</li>
+      <li><span class="dot dot--label"></span>標籤：幫地點取自己的名字</li>
+      <li><span class="dot dot--extra"></span>進階：分享、離線、報平安</li>
+    </ul>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="seg" role="group" aria-label="選擇你的手機系統">
+      <button type="button" data-plat="android" aria-pressed="true">Android</button>
+      <button type="button" data-plat="ios" aria-pressed="false">iPhone</button>
+    </div>
+    <div class="meter">
+      <span>進度</span>
+      <div class="meter__track"><div class="meter__fill" id="fill"></div></div>
+      <span><b id="cnt">0</b> / <b id="tot">6</b></span>
+    </div>
+  </div>
+</div>
+
+
+<section class="getit">
+  <div class="wrap getit__in">
+    <div class="qr__box qr--lg" id="qr-handout"><p class="qr__wait">QR 產生中…</p></div>
+    <div class="getit__txt">
+      <p class="getit__k">開始之前</p>
+      <h2>用手機掃這張，把講義帶著走</h2>
+      <p>掃完就能在自己的手機上打開這份講義。上課跟著做、回家再看一次，不用抄筆記。</p>
+      <p class="getit__note" id="qr-url"></p>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+<!-- ============ 0 準備 ============ -->
+<section class="unit unit--prep" id="u0">
+  <div class="pin"><span>0</span></div>
+  <p class="unit__kicker">先做這三件事</p>
+  <h2>開課前的暖身</h2>
+  <p class="unit__why">沒登入帳號，今天存的東西換手機就不見了。先把這三件事確認好，後面才存得住。</p>
+
+  <div class="stack">
+
+    <div class="card">
+      <h3>還沒裝 Google 地圖？掃這裡</h3>
+      <div class="apps">
+        <div class="app app--and">
+          <p class="app__tag">Android</p>
+          <div class="qr__box"><svg viewBox="0 0 37 37" shape-rendering="crispEdges" class="segno"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#000" d="M0 0.5h7m1 0h2m1 0h1m1 0h3m1 0h2m2 0h1m4 0h1m3 0h7m-37 1h1m5 0h1m1 0h1m1 0h1m3 0h2m1 0h5m2 0h1m3 0h1m1 0h1m5 0h1m-37 1h1m1 0h3m1 0h1m1 0h4m4 0h1m2 0h1m1 0h1m2 0h5m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m2 0h1m1 0h2m2 0h1m1 0h3m1 0h1m3 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h5m5 0h2m1 0h2m2 0h2m1 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m5 0h1m4 0h2m1 0h2m1 0h1m4 0h2m1 0h2m3 0h1m5 0h1m-37 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-27 1h1m1 0h1m1 0h1m3 0h3m2 0h1m1 0h4m-29 1h1m2 0h17m3 0h1m2 0h1m1 0h2m2 0h1m1 0h3m-36 1h3m1 0h1m5 0h1m1 0h1m2 0h2m1 0h1m3 0h1m2 0h2m3 0h5m-36 1h1m2 0h1m1 0h2m1 0h1m1 0h3m2 0h1m4 0h4m1 0h1m1 0h1m1 0h3m1 0h1m2 0h1m-37 1h1m7 0h2m2 0h1m1 0h1m1 0h2m1 0h2m1 0h3m1 0h2m1 0h3m2 0h3m-37 1h2m2 0h3m3 0h1m2 0h1m1 0h1m3 0h1m3 0h2m3 0h1m1 0h1m5 0h1m-35 1h2m1 0h1m1 0h2m1 0h2m3 0h4m4 0h6m3 0h2m-32 1h2m2 0h1m1 0h1m2 0h2m1 0h3m2 0h1m2 0h1m2 0h3m1 0h1m2 0h5m-32 1h1m1 0h1m3 0h1m8 0h1m5 0h2m1 0h1m1 0h1m1 0h4m-36 1h2m3 0h1m2 0h3m2 0h1m5 0h1m3 0h2m1 0h1m2 0h1m3 0h2m-36 1h2m1 0h1m3 0h1m2 0h1m1 0h1m3 0h2m1 0h1m1 0h2m2 0h5m1 0h1m1 0h1m-32 1h6m1 0h1m2 0h4m1 0h1m1 0h1m3 0h3m1 0h1m3 0h1m2 0h1m1 0h1m-36 1h1m3 0h1m1 0h1m4 0h1m2 0h2m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m2 0h1m2 0h1m-37 1h4m1 0h2m1 0h1m1 0h1m1 0h6m1 0h2m2 0h2m1 0h8m-34 1h2m1 0h1m3 0h2m3 0h1m2 0h1m1 0h3m1 0h1m1 0h1m2 0h2m4 0h1m1 0h1m-34 1h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h2m1 0h3m3 0h1m1 0h1m2 0h1m-35 1h4m1 0h1m3 0h3m2 0h3m3 0h1m4 0h1m3 0h4m-32 1h1m2 0h2m1 0h6m4 0h1m4 0h1m3 0h1m1 0h2m-32 1h2m2 0h1m3 0h3m2 0h2m1 0h1m1 0h1m4 0h6m2 0h2m-33 1h2m1 0h1m2 0h1m1 0h1m3 0h2m1 0h2m2 0h1m2 0h1m1 0h5m1 0h1m4 0h2m-37 1h1m2 0h1m4 0h1m1 0h1m3 0h1m5 0h1m1 0h1m6 0h3m1 0h3m-36 1h1m1 0h1m1 0h3m1 0h1m4 0h1m1 0h1m4 0h1m1 0h5m1 0h9m-29 1h1m4 0h1m1 0h1m3 0h4m2 0h1m2 0h1m3 0h1m1 0h1m-35 1h7m1 0h2m2 0h2m1 0h1m1 0h3m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1m2 0h2m-37 1h1m5 0h1m1 0h2m2 0h2m4 0h1m3 0h4m2 0h1m3 0h1m2 0h1m-36 1h1m1 0h3m1 0h1m1 0h1m4 0h1m1 0h1m4 0h1m3 0h1m1 0h7m3 0h1m-37 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h2m4 0h1m2 0h2m1 0h6m2 0h1m1 0h2m-37 1h1m1 0h3m1 0h1m3 0h8m3 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h1m-37 1h1m5 0h1m4 0h1m3 0h1m1 0h2m4 0h2m5 0h1m1 0h5m-37 1h7m1 0h4m1 0h1m2 0h1m2 0h2m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m2 0h1"/></svg></div>
+          <p class="app__note">Google Play 商店</p>
+        </div>
+        <div class="app app--ios">
+          <p class="app__tag">iPhone</p>
+          <div class="qr__box"><svg viewBox="0 0 33 33" shape-rendering="crispEdges" class="segno"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#000" d="M0 0.5h7m1 0h1m1 0h2m2 0h2m2 0h1m4 0h1m2 0h7m-33 1h1m5 0h1m5 0h1m6 0h1m2 0h1m1 0h1m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h3m2 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h1m1 0h2m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h4m2 0h1m2 0h2m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h1m1 0h3m3 0h1m2 0h1m4 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h2m2 0h1m1 0h5m1 0h2m1 0h2m-25 1h1m3 0h1m1 0h3m2 0h1m4 0h7m1 0h6m2 0h1m-31 1h4m1 0h2m1 0h7m1 0h1m2 0h5m3 0h3m-32 1h1m1 0h5m3 0h2m3 0h3m2 0h5m4 0h1m1 0h1m-31 1h2m1 0h2m3 0h1m4 0h4m1 0h1m1 0h2m2 0h1m5 0h2m-33 1h3m2 0h2m2 0h2m1 0h3m3 0h2m1 0h1m2 0h1m1 0h1m1 0h2m-30 1h2m2 0h1m3 0h2m3 0h1m2 0h3m1 0h1m1 0h2m3 0h1m1 0h2m-31 1h3m1 0h4m3 0h1m1 0h1m2 0h1m1 0h1m1 0h7m1 0h1m1 0h2m-30 1h2m4 0h6m3 0h3m1 0h3m1 0h2m-27 1h1m5 0h1m1 0h4m2 0h4m1 0h5m2 0h1m1 0h1m2 0h1m-32 1h1m3 0h2m1 0h2m4 0h5m4 0h2m1 0h1m3 0h3m-31 1h4m1 0h3m1 0h2m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m-31 1h2m1 0h1m4 0h1m1 0h2m1 0h3m2 0h3m1 0h1m3 0h1m3 0h2m-33 1h2m3 0h2m2 0h1m4 0h1m1 0h1m4 0h1m2 0h1m1 0h1m1 0h2m-30 1h3m2 0h1m1 0h1m3 0h4m3 0h1m1 0h1m1 0h2m3 0h1m1 0h1m1 0h1m-29 1h1m2 0h1m2 0h1m1 0h5m1 0h2m1 0h5m3 0h2m1 0h1m-30 1h2m1 0h1m4 0h1m1 0h1m2 0h3m1 0h4m1 0h2m5 0h1m-32 1h4m2 0h4m2 0h3m2 0h1m1 0h10m3 0h1m-25 1h3m1 0h1m2 0h2m3 0h1m2 0h2m3 0h1m1 0h2m-32 1h7m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m1 0h2m1 0h1m-32 1h1m5 0h1m3 0h1m2 0h1m3 0h2m1 0h3m1 0h1m3 0h1m2 0h2m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h3m2 0h1m2 0h2m1 0h1m2 0h6m2 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m3 0h2m1 0h1m3 0h3m1 0h1m1 0h5m-31 1h1m1 0h3m1 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h4m-29 1h1m5 0h1m4 0h1m1 0h2m2 0h3m1 0h4m4 0h1m-30 1h7m1 0h1m1 0h4m1 0h1m1 0h6m1 0h1m7 0h1"/></svg></div>
+          <p class="app__note">App Store</p>
+        </div>
+      </div>
+      <p class="hint" style="margin-top:.85rem">已經裝好的人跳過這一步。不過建議順手更新到最新版，畫面才會跟講義上的一樣。</p>
+    </div>
+
+    <div class="card">
+      <h3>一、確認已經登入 Google 帳號</h3>
+      <ol class="steps">
+        <li>打開 <span class="ui">Google 地圖</span> App。</li>
+        <li>看畫面<b>右上角</b>：有你的大頭貼或名字縮寫，就是登入了。<span class="hint">如果是一個灰色人像，請點下去登入。存的清單和標籤都是跟著帳號走的。</span></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>二、認得畫面下方的三個分頁</h3>
+      <ol class="steps">
+        <li><span class="ui">探索</span>：找地方、找餐廳，平常搜尋都在這裡。</li>
+        <li><span class="ui">個人中心</span>：<b>今天最重要的一頁</b>。存過的地點、清單、標籤全在這。<span class="hint and-only">部分 Android 版本這一頁會顯示為「已儲存」，位置一樣。</span><span class="hint ios-only">部分 iPhone 版本這一頁會顯示為「已儲存」，位置一樣。</span></li>
+        <li><span class="ui">貢獻</span>：寫評論、傳照片用的，今天不會用到。</li>
+      </ol>
+      <figure class="shot">
+        <figcaption class="shot__cap"><em>示意圖</em>主畫面：右上角大頭貼、下方三個分頁</figcaption>
+        <div class="pair"><div class="ph ph--and"><p class="ph__tag">Android</p><img class="ph__img" src="shots/and-01.png" alt="Android 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava hl" data-n="2">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__nav"><span>探索</span><span class="hl" data-n="1">個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div><div class="ph ph--ios"><p class="ph__tag">iPhone</p><img class="ph__img" src="shots/ios-01.png" alt="iPhone 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava hl" data-n="2">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__nav"><span>探索</span><span class="hl" data-n="1">個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div></div>
+        <p class="shot__note"><b>①</b> 存過的地點、清單、標籤全在這一頁。<b>②</b> 右上角是你的大頭貼就代表登入了；離線地圖和位置分享也從這裡進去。兩支手機差在外框：Android 圓角較小、底部是短横條；iPhone 圓角大、上方有藥丸狀的動態島。</p>
+      </figure>
+
+    </div>
+
+    <div class="card">
+      <h3>三、學會三個手勢</h3>
+      <ol class="steps">
+        <li><b>輕觸</b>＝點一下就放開。</li>
+        <li><b>按住</b>＝手指壓著不動約一秒，地圖上會掉下一根紅色圖釘。<span class="hint">巷子裡的民宿、沒有店名的門口、停車的位置，都是靠這一招。</span></li>
+        <li><b>向右滑</b>＝在畫面下方那張地點資訊卡上，手指往右撥，可以看到更多按鈕。</li>
+      </ol>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>準備好了</span></label>
+  </div>
+</section>
+
+<!-- ============ 1 儲存 ============ -->
+<section class="unit unit--save" id="u1">
+  <div class="pin"><span>1</span></div>
+  <p class="unit__kicker">核心功能一</p>
+  <h2>把地點存進清單</h2>
+  <p class="unit__why">看到喜歡的店、訂好的旅館，當下按一個「儲存」，它就永遠留在你的清單裡。這是最常用、也最不會出錯的一招。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>怎麼存</h3>
+      <ol class="steps">
+        <li>打開 <span class="ui">Google 地圖</span> App。</li>
+        <li>搜尋地點、輕觸地圖上的標記，或是<b>按住</b>地圖上任何一個位置。<span class="hint">按住會放下一根圖釘，沒有店名的地方就用這招。</span></li>
+        <li>輕觸畫面<b>底部</b>的地點名稱或地址，把資訊卡叫出來。</li>
+        <li>輕觸 <span class="ui">儲存</span>，然後選一個清單。</li>
+      </ol>
+      <figure class="shot">
+        <figcaption class="shot__cap"><em>示意圖</em>步驟 3–4：點畫面底部的地點名稱，再按「儲存」</figcaption>
+        <div class="pair"><div class="ph ph--and"><p class="ph__tag">Android</p><img class="ph__img" src="shots/and-02.png" alt="Android 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__back">←</span><span class="ph__search">好味小吃店</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__sheet"><b>好味小吃店</b><span class="ph__sub">小吃 · 4.5 ★ · 300 公尺</span><div class="ph__btns"><span class="ph__b">路線</span><span class="ph__b hl" data-n="1">儲存</span><span class="ph__b">分享</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div><div class="ph ph--ios"><p class="ph__tag">iPhone</p><img class="ph__img" src="shots/ios-02.png" alt="iPhone 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__sheet"><div class="ph__grab"></div><div class="ph__close"><span>↗</span><span>✕</span></div><b>好味小吃店</b><span class="ph__sub">小吃 · 4.5 ★ · 300 公尺</span><div class="ph__btns"><span class="ph__b">路線</span><span class="ph__b hl" data-n="1">儲存</span><span class="ph__b">分享</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div></div>
+        <p class="shot__note"><b>儲存</b>這顆按鈕兩邊一樣。差別在卡片本身：Android 是搜尋列出現 <b>←</b> 返回鍵；iPhone 卡片頂端有一條<b>灰色把手</b>，右上角是 <b>✕</b> 關閉和分享（2025 年改版後移到這裡）。</p>
+      </figure>
+
+    </div>
+
+    <div class="card">
+      <h3>一開始就有的四個清單</h3>
+      <ol class="steps">
+        <li><span class="ui">喜愛的地點</span>　常去、確定會再去的地方。</li>
+        <li><span class="ui">想去的地點</span>　還沒去過、聽人家推薦的。<span class="hint">出發前規劃就丟這裡，最順手。</span></li>
+        <li><span class="ui">已加星號的地點</span>　重要、要優先處理的。</li>
+        <li><span class="ui">旅遊計畫</span>　這趟行程專用。</li>
+      </ol>
+    </div>
+
+    <div class="find">
+      <h3>下次怎麼找回來</h3>
+      <p>畫面下方 <span class="ui">個人中心</span><span class="sep">›</span>往下捲到 <span class="ui">你的清單</span><span class="sep">›</span>點開那個清單，存過的地點就整排列在那裡。</p>
+    </div>
+
+    <div class="card">
+      <h3>存錯了怎麼刪</h3>
+      <ol class="steps">
+        <li><span class="ui">個人中心</span><span class="sep">›</span><span class="ui">你的清單</span><span class="sep">›</span>點開清單。</li>
+        <li>輕觸 <span class="ui">更多</span>（三個點的圖示）<span class="sep">›</span><span class="ui">編輯清單</span>。</li>
+        <li>找到那個地點，輕觸旁邊的<span class="ui">移除</span>。</li>
+      </ol>
+      <p class="hint" style="margin-top:.8rem">一份清單最多可以放 3,000 個地點，超過可能會顯示不正常 —— 一般人一輩子用不完，可以安心存。</p>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會存地點了</span></label>
+  </div>
+</section>
+
+<!-- ============ 2 標籤 ============ -->
+<section class="unit unit--label" id="u2">
+  <div class="pin"><span>2</span></div>
+  <p class="unit__kicker">核心功能二</p>
+  <h2>幫地點加上私人標籤</h2>
+  <p class="unit__why">「新竹市東區光復路二段101號」記不住，但「阿姨家」記得住。標籤就是幫一個地點取一個<b>只有你看得到</b>的名字，以後搜尋打那三個字就找得到。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>怎麼加標籤</h3>
+      <ol class="steps">
+        <li>打開 <span class="ui">Google 地圖</span> App。</li>
+        <li>搜尋地址，或在地圖上<b>按住</b>那個位置放下圖釘。</li>
+        <li>輕觸畫面<b>底部</b>的地點名稱。</li>
+        <li>輕觸 <span class="ui">標籤</span>，打上你自己的叫法，例如「阿姨家」。</li>
+      </ol>
+      <figure class="shot">
+        <figcaption class="shot__cap"><em>示意圖</em>步驟 2–4：按住放圖釘後，點「標籤」</figcaption>
+        <div class="pair"><div class="ph ph--and"><p class="ph__tag">Android</p><img class="ph__img" src="shots/and-03.png" alt="Android 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__back">←</span><span class="ph__search">光復路二段 101 號</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span><span class="ph__hold">按住 1 秒</span></div><div class="ph__sheet"><b>光復路二段 101 號</b><span class="ph__sub">已放置圖釘</span><div class="ph__btns"><span class="ph__b">路線</span><span class="ph__b">儲存</span><span class="ph__b hl" data-n="1">標籤</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div><div class="ph ph--ios"><p class="ph__tag">iPhone</p><img class="ph__img" src="shots/ios-03.png" alt="iPhone 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span><span class="ph__hold">按住 1 秒</span></div><div class="ph__sheet"><div class="ph__grab"></div><div class="ph__close"><span>↗</span><span>✕</span></div><b>光復路二段 101 號</b><span class="ph__sub">已放置圖釘</span><div class="ph__btns"><span class="ph__b">路線</span><span class="ph__b">儲存</span><span class="ph__b hl" data-n="1">標籤</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div></div>
+        <p class="shot__note">沒有店名的地方（民宿門口、停車位、親戚家），按住地圖放圖釘就會出現 <b>標籤</b>。有店名的<b>商家</b>不會直接看到它，要點右上角的 <b>更多 ⋯</b> 再選「新增標籤」。</p>
+      </figure>
+
+      <p class="hint" style="margin-top:.85rem"><b>如果是有店名的商家：</b>進入該地點的頁面，輕觸 <span class="ui">更多</span>（三個點）<span class="sep">›</span><span class="ui">新增標籤</span>。</p>
+    </div>
+
+    <div class="find">
+      <h3>下次怎麼找回來</h3>
+      <p><span class="ui">個人中心</span><span class="sep">›</span>往下捲到 <span class="ui">已加上標籤</span><span class="sep">›</span>點那個標籤，地圖就直接跳到那裡。<br>或者更快：直接在搜尋列打「阿姨家」。</p>
+    </div>
+
+    <div class="card">
+      <h3>改名字</h3>
+      <ol class="steps and-only">
+        <li><span class="ui">個人中心</span><span class="sep">›</span><span class="ui">已加上標籤</span><span class="sep">›</span>輕觸要改的標籤。</li>
+        <li>輕觸畫面底部的地點名稱或地址。</li>
+        <li>輕觸 <span class="ui">標籤</span>，輸入新名稱。</li>
+        <li>輕觸 <span class="ui">新增標籤</span>。</li>
+      </ol>
+      <ol class="steps ios-only">
+        <li><span class="ui">個人中心</span><span class="sep">›</span><span class="ui">已加上標籤</span><span class="sep">›</span>輕觸要改的標籤。</li>
+        <li>輕觸畫面底部的地點名稱或地址。</li>
+        <li>輕觸 <span class="ui">修改標籤</span>，輸入新名稱。</li>
+        <li>輕觸 <span class="ui">完成</span>。</li>
+      </ol>
+      <figure class="shot">
+        <figcaption class="shot__cap"><em>示意圖</em>改標籤名稱：這一步兩邊按鈕<b>不一樣</b></figcaption>
+        <div class="pair"><div class="ph ph--and"><p class="ph__tag">Android</p><img class="ph__img" src="shots/and-04.png" alt="Android 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__back">←</span><span class="ph__search">阿姨家</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__sheet"><b>光復路二段 101 號</b><span class="ph__sub">已加上標籤</span><div class="ph__btns"><span class="ph__b hl" data-n="1">標籤</span></div><div class="ph__field">阿姨家</div><div class="ph__btns"><span class="ph__b hl" data-n="2">新增標籤</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div><div class="ph ph--ios"><p class="ph__tag">iPhone</p><img class="ph__img" src="shots/ios-04.png" alt="iPhone 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">阿姨家</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__sheet"><div class="ph__grab"></div><div class="ph__close"><span>↗</span><span>✕</span></div><b>光復路二段 101 號</b><span class="ph__sub">已加上標籤</span><div class="ph__btns"><span class="ph__b hl" data-n="1">修改標籤</span></div><div class="ph__field">阿姨家</div><div class="ph__btns"><span class="ph__b hl" data-n="2">完成</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div></div>
+        <p class="shot__note">Android 是 <b>標籤 → 輸入 → 新增標籤</b>；iPhone 是 <b>修改標籤 → 輸入 → 完成</b>。最後那顆按鈕名稱不同，帶操作時要分開講。</p>
+      </figure>
+
+      <p class="hint" style="margin-top:.85rem"><b>刪掉標籤：</b>在 <span class="ui">已加上標籤</span> 裡，輕觸該筆旁邊的 <span class="ui">更多</span><span class="sep">›</span><span class="ui">移除標籤</span>。手滑刪錯了，馬上輕觸 <span class="ui">復原</span> 就救得回來。</p>
+    </div>
+
+    <div class="card">
+      <h3>標籤是私人的</h3>
+      <ol class="steps">
+        <li>你取的名字<b>只有你自己看得到</b>，別人打開地圖不會看到「阿姨家」。</li>
+        <li>加過標籤的地點，會出現在你的地圖、搜尋建議，還有 Google 相簿裡。</li>
+      </ol>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會加標籤了</span></label>
+  </div>
+</section>
+
+<!-- ============ 對照：清單 vs 標籤 ============ -->
+<section class="block" id="vs">
+  <p class="block__kicker">最容易搞混的一頁</p>
+  <h2>清單和標籤，差在哪？</h2>
+  <p class="block__sub">兩個都是「存起來」，但用途完全不同。一句話：<b>清單管一群，標籤管一個</b>。</p>
+  <div class="vs">
+    <div class="vs--save">
+      <p class="tag">清單</p>
+      <h3>把一群地點收進資料夾</h3>
+      <ul>
+        <li><span>可以分成「想去的地點」「喜愛的地點」或自己開新的</span></li>
+        <li><span>可以<b>分享給別人</b>，也可以請家人一起編輯</span></li>
+        <li><span>每個地點可以加附註，寫下為什麼想去</span></li>
+        <li><span>會在地圖上顯示愛心、星星等圖示</span></li>
+      </ul>
+      <p>適合：這趟旅行想去的十家店、口袋名單。</p>
+    </div>
+    <div class="vs--label">
+      <p class="tag">標籤</p>
+      <h3>幫單一地點取自己的名字</h3>
+      <ul>
+        <li><span>取什麼名字都可以，例如「阿姨家」「明天回診的醫院」</span></li>
+        <li><span><b>只有你看得到</b>，不能分享</span></li>
+        <li><span>直接在搜尋列打那個名字就會跳出來</span></li>
+        <li><span>特別適合沒有店名、只有地址的地方</span></li>
+      </ul>
+      <p>適合：民宿門口、停車的位置、親戚家。</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 3 自建清單 ============ -->
+<section class="unit unit--extra" id="u3">
+  <div class="pin"><span>3</span></div>
+  <p class="unit__kicker">進階一</p>
+  <h2>開一份自己的清單，傳給同行的人</h2>
+  <p class="unit__why">「三日遊必吃」「爸媽來玩」——自己開一份清單，比塞在預設清單裡好找太多。開好還能把連結傳給一起去的人。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>開一份新清單</h3>
+      <ol class="steps and-only">
+        <li>輕觸 <span class="ui">個人中心</span><span class="sep">›</span><span class="ui">新增清單</span>。</li>
+        <li>輸入名稱和說明，例如「三日遊必吃」。</li>
+        <li>選清單類型：<span class="ui">私人</span>（只有你看得到）或 <span class="ui">已分享</span>（用連結給人看或編輯）。</li>
+        <li>輕觸右上方的 <span class="ui">儲存</span>。</li>
+      </ol>
+      <ol class="steps ios-only">
+        <li>輕觸 <span class="ui">已儲存</span> 分頁。</li>
+        <li>往下捲到 <span class="ui">你的清單</span>。</li>
+        <li>輕觸 <span class="ui">新增清單</span>，輸入名稱和說明。</li>
+        <li>輕觸 <span class="ui">儲存</span>。</li>
+      </ol>
+
+      <figure class="shot">
+        <figcaption class="shot__cap"><em>示意圖</em>開新清單的入口：iPhone 要多捲一段</figcaption>
+        <div class="pair"><div class="ph ph--and"><p class="ph__tag">Android</p><img class="ph__img" src="shots/and-05.png" alt="Android 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava">H</span></div><div class="ph__list"><p class="ph__hd">你的清單</p><div class="ph__li hl" data-n="1">＋ 新增清單</div><div class="ph__li">我的最愛<i>12</i></div><div class="ph__li">想去的地點<i>8</i></div><div class="ph__li">已加星號的地點<i>3</i></div></div><div class="ph__nav"><span>探索</span><span class="hl">個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div><div class="ph ph--ios"><p class="ph__tag">iPhone</p><img class="ph__img" src="shots/ios-05.png" alt="iPhone 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava">H</span></div><div class="ph__list"><span class="ph__scroll">往下捲 ↓</span><p class="ph__hd">最近儲存的地點</p><div class="ph__li">好味小吃店</div><p class="ph__hd">你的清單</p><div class="ph__li hl" data-n="1">＋ 新增清單</div><div class="ph__li">想去的地點<i>8</i></div></div><div class="ph__nav"><span>探索</span><span class="hl">個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div></div>
+        <p class="shot__note">Android 進 <b>個人中心</b> 就看得到 <b>新增清單</b>，而且可以直接選「私人／已分享」。iPhone 要進 <b>已儲存</b> 後<b>往下捲</b>到「你的清單」才找得到。長輩在這裡最常以為「我的手機沒有這個功能」。</p>
+      </figure>
+      <p class="hint" style="margin-top:.85rem">開好之後，回到單元 1 的存法，按 <span class="ui">儲存</span> 時就能選到這份新清單了。</p>
+    </div>
+
+    <div class="card">
+      <h3>幫地點寫一句附註</h3>
+      <ol class="steps">
+        <li>進到清單，選中那個地點。</li>
+        <li>輕觸 <span class="ui">要為這個地點新增附註嗎？</span></li>
+        <li>寫下你想記的事，例如「要先訂位、公休二」。</li>
+        <li>輕觸 <span class="ui">儲存</span>。<span class="hint">一則附註最多 4,000 個字，寫多長都夠。</span></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>分享給別人</h3>
+      <ol class="steps">
+        <li><b>只給人看：</b>輕觸清單旁的 <span class="ui">更多</span><span class="sep">›</span><span class="ui">分享清單</span>，把連結用 LINE 傳出去。</li>
+        <li><b>讓人一起編輯：</b>輕觸 <span class="ui">更多</span><span class="sep">›</span><span class="ui">分享選項</span><span class="sep">›</span><span class="ui">邀請編輯者</span>。</li>
+        <li><b>收回編輯權：</b>把<span class="ui">讓其他人編輯這份清單</span>關掉，對方就只能看。</li>
+      </ol>
+    </div>
+
+    <div class="find">
+      <h3>下次怎麼找回來</h3>
+      <p><span class="ui">個人中心</span><span class="sep">›</span><span class="ui">你的清單</span>。想調順序就輕觸 <span class="ui">編輯</span><span class="sep">›</span><span class="ui">自訂清單順序</span>，按住四條線拖動，再按 <span class="ui">儲存</span>。</p>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會開清單也會分享了</span></label>
+  </div>
+</section>
+
+<!-- ============ 4 離線地圖 ============ -->
+<section class="unit unit--extra" id="u4">
+  <div class="pin"><span>4</span></div>
+  <p class="unit__kicker">進階二</p>
+  <h2>先把地圖存進手機，沒網路也能用</h2>
+  <p class="unit__why">出國沒買網路、山區收不到訊號，只要出發前在 Wi-Fi 下把那一區的地圖抓下來，照樣看得到路、也能導航。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>抓一個地方的地圖</h3>
+      <ol class="steps and-only">
+        <li>搜尋你要去的地方，例如「京都市」。</li>
+        <li>在畫面下方的資訊卡上<b>向右滑</b>。</li>
+        <li>依序輕觸 <span class="ui">更多</span><span class="sep">›</span><span class="ui">下載離線地圖</span><span class="sep">›</span><span class="ui">下載</span>。</li>
+      </ol>
+      <ol class="steps ios-only">
+        <li>搜尋你要去的地方，例如「京都市」。</li>
+        <li>輕觸畫面底部的地點名稱或地址。</li>
+        <li>依序輕觸 <span class="ui">更多</span><span class="sep">›</span><span class="ui">下載離線地圖</span><span class="sep">›</span><span class="ui">下載</span>。</li>
+      </ol>
+      <figure class="shot">
+        <figcaption class="shot__cap"><em>示意圖</em>找「下載離線地圖」：Android 要先滑，iPhone 直接點</figcaption>
+        <div class="pair"><div class="ph ph--and"><p class="ph__tag">Android</p><img class="ph__img" src="shots/and-06.png" alt="Android 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__back">←</span><span class="ph__search">京都市</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span></div><div class="ph__sheet"><b>京都市</b><span class="ph__sub">日本 · 京都府</span><div class="ph__btns"><span class="ph__b">路線</span><span class="ph__b">儲存</span><span class="ph__swipe hl" data-n="1">向右滑 →</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div><div class="ph ph--ios"><p class="ph__tag">iPhone</p><img class="ph__img" src="shots/ios-06.png" alt="iPhone 實機畫面"><div class="ph__frame"><div class="ph__os"><span>9:41</span><span class="sig">▮▮▮ ▮ 84%</span></div><div class="ph__top"><span class="ph__search">在地圖中搜尋</span><span class="ph__ava">H</span></div><div class="ph__map"><span class="ph__mk"></span><div class="ph__menu" style="top:auto;bottom:.5rem"><span>新增標籤</span><span class="hl" data-n="2">下載離線地圖</span><span>分享</span></div></div><div class="ph__sheet"><div class="ph__grab"></div><div class="ph__close"><span>↗</span><span>✕</span></div><b>京都市</b><span class="ph__sub">日本 · 京都府</span><div class="ph__btns"><span class="ph__b">路線</span><span class="ph__b">儲存</span><span class="ph__b hl" data-n="1">更多 ⋯</span></div></div><div class="ph__nav"><span>探索</span><span>個人中心</span><span>貢獻</span></div><div class="ph__home"></div></div></div></div>
+        <p class="shot__note">Android 的按鈕列藏在後面，手指要在那排按鈕上<b>往右撥</b>，滑到最後才看得到 <b>更多</b>。iPhone 點一下底部地點名稱，直接就有 <b>更多 ⋯</b>。這是全課最容易一半的人卡住的一步。</p>
+      </figure>
+    </div>
+
+    <div class="card">
+      <h3>自己框一塊範圍</h3>
+      <ol class="steps">
+        <li>輕觸右上角的<b>個人資料相片</b>。</li>
+        <li>輕觸 <span class="ui">離線地圖</span><span class="sep">›</span><span class="ui">選取自己的地圖</span>。</li>
+        <li>用手指把方框拉到你要的範圍，輕觸 <span class="ui">下載</span>。<span class="hint">範圍拉越大越佔空間，建議只框住會走動的那一區。</span></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>會過期，但會自己更新</h3>
+      <ol class="steps">
+        <li>離線地圖快到期時（剩 15 天內），手機一連上 Wi-Fi，Google 地圖就會自己更新。</li>
+        <li>想手動更新：進 <span class="ui">離線地圖</span>，點那份地圖，輕觸 <span class="ui">更新</span>。</li>
+        <li>也可以在設定裡打開 <span class="ui">自動更新離線地圖</span>，一勞永逸。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>離線的時候，有些事做不到</h3>
+      <ol class="steps">
+        <li><b>還能用：</b>看地圖、開車導航（整段路線都要在你下載的範圍內）。</li>
+        <li><b>不能用：</b>大眾運輸、單車、步行路線。</li>
+        <li><b>不能用：</b>即時路況、替代路線。</li>
+      </ol>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會下載離線地圖了</span></label>
+  </div>
+</section>
+
+<!-- ============ 5 即時位置 ============ -->
+<section class="unit unit--extra" id="u5">
+  <div class="pin"><span>5</span></div>
+  <p class="unit__kicker">進階三</p>
+  <h2>把即時位置分享給家人</h2>
+  <p class="unit__why">一個人出門、或跟團走散的時候，家人打開地圖就知道你在哪。可以設定分享多久，時間到會自動停。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>開始分享</h3>
+      <ol class="steps">
+        <li>確認已登入，而且對方的 Gmail 已經在你的 Google 聯絡人裡。</li>
+        <li>輕觸右上角的<b>個人資料相片或姓名縮寫</b>。</li>
+        <li>輕觸 <span class="ui">位置資訊分享</span><span class="sep">›</span><span class="ui">開始分享位置資訊</span>。</li>
+        <li>選擇要分享多久（可以選一段時間，或選<span class="ui">直到你關閉這項設定</span>）。</li>
+        <li>點選要分享的對象，輕觸 <span class="ui">分享</span>。</li>
+      </ol>
+      <p class="hint ios-only" style="margin-top:.85rem">iPhone 也可以直接從 iMessage 分享「你的即時位置資訊 1 小時」，最長可延長到 3 天。</p>
+    </div>
+
+    <div class="find">
+      <h3>怎麼停掉</h3>
+      <p><b>個人資料相片</b><span class="sep">›</span><span class="ui">位置資訊分享</span><span class="sep">›</span>點那位對象<span class="sep">›</span><span class="ui">停止</span>。</p>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會分享位置也會停掉了</span></label>
+  </div>
+</section>
+
+</main>
+
+<div class="wrap">
+
+<!-- ============ 速查表 ============ -->
+<section class="block" id="diff">
+  <p class="block__kicker">兩個系統不一樣的地方</p>
+  <h2>iPhone 與 Android 差異速查</h2>
+  <p class="block__sub">大部分步驟兩邊一模一樣，真正會讓學員卡住的只有下面這幾處。</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>情境</th><th>Android</th><th>iPhone</th></tr></thead>
+      <tbody>
+        <tr><td>存東西的那一頁</td><td>下方 <b>個人中心</b></td><td>下方 <b>個人中心</b>，部分版本顯示為 <b>已儲存</b></td></tr>
+        <tr><td>開新清單的入口</td><td>個人中心 › <b>新增清單</b>，可直接選「私人／已分享」</td><td>已儲存 › 往下捲到「你的清單」› <b>新增清單</b></td></tr>
+        <tr><td>改標籤名稱</td><td>輕觸 <b>標籤</b> › 輸入 › <b>新增標籤</b></td><td>輕觸 <b>修改標籤</b> › 輸入 › <b>完成</b></td></tr>
+        <tr><td>下載離線地圖</td><td>資訊卡<b>向右滑</b> › 更多 › 下載離線地圖</td><td>輕觸底部地點名稱 › 更多 › 下載離線地圖</td></tr>
+        <tr><td>分享即時位置</td><td>個人資料相片 › 位置資訊分享</td><td>同左，另可從 <b>iMessage</b> 分享，最長 3 天</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="block" id="faq">
+  <p class="block__kicker">現場最常被問</p>
+  <h2>卡住的時候</h2>
+  <p class="block__sub">照著順序檢查，八成的問題都在這六題裡。</p>
+  <div class="faq">
+    <div><h3>存過的地點通通不見了</h3><p>先看右上角是不是自己的大頭貼。換手機、或不小心登入另一個 Google 帳號，清單就會看起來「空的」。登回原本那個帳號，東西就都在。</p></div>
+    <div><h3>找不到「已加上標籤」</h3><p>在 <span class="ui">個人中心</span> 那一頁<b>往下捲</b>，它排在「你的清單」附近。第一次用的人常常只看畫面上半部就放棄了。</p></div>
+    <div><h3>打了標籤的名字，搜尋卻找不到</h3><p>兩個原因：一是沒登入同一個帳號；二是名字打錯字。可以先到 <span class="ui">個人中心</span> › <span class="ui">已加上標籤</span> 確認你當初取的到底叫什麼。</p></div>
+    <div><h3>清單傳給別人，會被亂改嗎？</h3><p>不會。除非你另外開了 <span class="ui">讓其他人編輯這份清單</span>，否則對方只能看。想收回隨時把它關掉就好。</p></div>
+    <div><h3>那個地方沒有店名，怎麼存？</h3><p>用<b>按住</b>：手指壓在地圖上那個位置約一秒，掉下一根圖釘，再輕觸畫面底部就能 <span class="ui">儲存</span> 或加 <span class="ui">標籤</span>。民宿門口、停車位都用這招。</p></div>
+    <div><h3>畫面上的字跟講義不一樣</h3><p>Google 地圖會改版，按鈕名稱偶爾會換。先到 App Store／Play 商店把 Google 地圖更新到最新版；若還是不同，位置通常沒變，找長得像的那顆按鈕。</p></div>
+  </div>
+</section>
+
+<!-- ============ 帶回家 ============ -->
+<section class="block" id="home">
+  <p class="block__kicker">回家練習</p>
+  <h2>今天回去做四件事</h2>
+  <p class="block__sub">不做不會記得。四件事加起來十分鐘。</p>
+  <div class="cheat">
+    <div><b>練習一</b>把<b>自己家</b>存到「喜愛的地點」。</div>
+    <div><b>練習二</b>幫<b>常去的醫院或藥局</b>加一個標籤，取自己叫得出來的名字。</div>
+    <div><b>練習三</b>開一份新清單，名字自己取，丟三個想去的地方進去。</div>
+    <div><b>練習四</b>把那份清單用 LINE 傳給一位家人。</div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>本頁的操作步驟與按鈕名稱，皆依 Google 地圖官方說明中心的繁體中文版本整理。Google 地圖會不定期改版，實際畫面文字可能與講義略有差異，操作位置通常不變。</p>
+    <p class="src">
+      <a href="https://support.google.com/maps/answer/3184808?hl=zh-Hant" target="_blank" rel="noopener">儲存喜愛的地點</a>
+      <a href="https://support.google.com/maps/answer/6257830?hl=zh-Hant" target="_blank" rel="noopener">為地點加上私人標籤</a>
+      <a href="https://support.google.com/maps/answer/7280933?hl=zh-Hant" target="_blank" rel="noopener">建立地點清單</a>
+      <a href="https://support.google.com/maps/answer/9948049?hl=zh-Hant" target="_blank" rel="noopener">個人中心分頁</a>
+      <a href="https://support.google.com/maps/answer/6291838?hl=zh-Hant" target="_blank" rel="noopener">下載離線地圖</a>
+      <a href="https://support.google.com/maps/answer/15437054?hl=zh-Hant" target="_blank" rel="noopener">分享即時位置</a>
+    </p>
+  </div>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(function(){
+  var page = document.getElementById('page');
+  var K = { plat:'gmapcourse.plat', teach:'gmapcourse.teach', done:'gmapcourse.done' };
+  function get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+  function set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+
+  /* --- platform --- */
+  var segBtns = Array.prototype.slice.call(document.querySelectorAll('.seg button'));
+  function setPlat(p){
+    page.setAttribute('data-plat', p);
+    segBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.plat === p)); });
+    set(K.plat, p);
+  }
+  segBtns.forEach(function(b){ b.addEventListener('click', function(){ setPlat(b.dataset.plat); }); });
+  var savedPlat = get(K.plat);
+  setPlat(savedPlat === 'ios' || savedPlat === 'android' ? savedPlat : 'android');
+
+  /* --- teacher notes --- */
+  var tbtn = document.getElementById('tbtn');
+  if (tbtn) {
+    var setTeach = function(on){
+      page.setAttribute('data-teach', on ? 'on' : 'off');
+      tbtn.setAttribute('aria-pressed', String(on));
+      set(K.teach, on ? 'on' : 'off');
+    };
+    tbtn.addEventListener('click', function(){
+      setTeach(page.getAttribute('data-teach') !== 'on');
+    });
+    setTeach(get(K.teach) !== 'off');
+  }
+
+  /* --- progress --- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[data-unit]'));
+  var cnt = document.getElementById('cnt');
+  var tot = document.getElementById('tot');
+  var fill = document.getElementById('fill');
+  tot.textContent = String(boxes.length);
+
+  var stored = (get(K.done) || '').split(',');
+  boxes.forEach(function(b,i){ if (stored.indexOf(String(i)) > -1) b.checked = true; });
+
+  function refresh(){
+    var done = [];
+    boxes.forEach(function(b,i){ if (b.checked) done.push(i); });
+    cnt.textContent = String(done.length);
+    fill.style.width = (boxes.length ? (done.length / boxes.length * 100) : 0) + '%';
+    set(K.done, done.join(','));
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', refresh); });
+  refresh();
+
+  /* --- 講義 QR ---------------------------------------------------------
+     ★ 放到 GitHub Pages 之後，把網址寫死在下面這一行，例如：
+         var HANDOUT_URL = 'https://你的帳號.github.io/gmap/';
+       留空的話會自動抓「目前這一頁的網址」，放到哪就指到哪。
+  --------------------------------------------------------------------- */
+  var HANDOUT_URL = '';
+
+  (function(){
+    var box = document.getElementById('qr-handout');
+    var out = document.getElementById('qr-url');
+    if (!box) { return; }
+    if (box.querySelector('svg')) { return; }   /* 已在檔案裡畫好，不需要重畫 */
+
+    function giveUp(){
+      box.innerHTML = '<p class="qr__wait">講義放上網之後<br>這裡會自動出現 QR</p>';
+      if (out) { out.textContent = ''; }
+    }
+
+    var url = HANDOUT_URL ||
+      (/^https?:$/.test(location.protocol) ? location.href.split('#')[0] : '');
+    if (!url) { giveUp(); return; }
+
+    function draw(){
+      if (typeof qrcode !== 'function') { giveUp(); return; }
+      try {
+        var q = qrcode(0, 'M');
+        q.addData(url);
+        q.make();
+        var tag = q.createSvgTag(4, 0);
+        if (!tag || tag.indexOf('<svg') === -1) { giveUp(); return; }
+        box.innerHTML = tag;
+        var svg = box.querySelector('svg');
+        if (!svg) { giveUp(); return; }
+        svg.setAttribute('shape-rendering', 'crispEdges');
+        if (!svg.getAttribute('viewBox')) {
+          var w = parseFloat(svg.getAttribute('width')) || 0;
+          var h = parseFloat(svg.getAttribute('height')) || w;
+          if (w) { svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h); }
+        }
+        svg.removeAttribute('width');
+        svg.removeAttribute('height');
+        if (out) { out.textContent = url; }
+      } catch (e) { giveUp(); }
+    }
+
+    if (typeof qrcode === 'function') { draw(); }
+    else { window.addEventListener('load', draw); }
+  })();
+
+
+  /* --- 實機截圖插槽：shots/ 資料夾裡有圖就自動換成照片 --- */
+  Array.prototype.slice.call(document.querySelectorAll('.ph__img')).forEach(function(img){
+    img.addEventListener('load', function(){
+      img.classList.add('is-on');
+      var f = img.parentNode.querySelector('.ph__frame');
+      if (f) { f.hidden = true; }
+    });
+    img.addEventListener('error', function(){ img.remove(); });
+  });
+})();
+</script>
+
+</body>
+</html>
