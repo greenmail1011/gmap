@@ -272,6 +272,7 @@ main{padding:2.2rem 0 1rem}
   background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.85rem;
   box-shadow:0 4px 10px -4px var(--accent)}
 .saybtn.is-on{background:var(--bad);box-shadow:0 4px 10px -4px var(--bad)}
+.saybtn[disabled]{background:var(--ink-3);box-shadow:none;cursor:not-allowed;opacity:.55}
 .saybtn svg{width:1.05rem;height:1.05rem;fill:currentColor}
 .sayrow>div{min-width:0;flex:1 1 auto}
 .sayrow b{display:block;font-size:1.02rem;line-height:1.6;letter-spacing:0}
@@ -597,22 +598,22 @@ footer .src a{display:inline-block;padding:.62rem 0}
         <li>打開 <span class="ui">Google 地圖</span>。</li>
         <li>搜尋地址，或在地圖上<b>按住</b>那個位置放下圖釘。</li>
         <li>輕觸畫面<b>底部</b>的地點名稱。
-          <span class="see">卡片滑出來，那排按鈕裡會有一顆 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.6a2 2 0 0 1 2-2h9.05c.64 0 1.24.31 1.62.83L21 12l-4.33 6.57c-.38.52-.98.83-1.62.83H6a2 2 0 0 1-2-2z"/><circle cx="8.3" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>標籤</span>。看不到就在那排按鈕上<b>左右撥</b>，它會移進來。</span>
+          <span class="see">卡片滑出來，那排按鈕裡會有一顆 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V3.9h10.9l3.6 4.75-3.6 4.75H6"/></svg>標籤</span>。看不到就在那排按鈕上<b>左右撥</b>，它會移進來。</span>
         </li>
-        <li>輕觸 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.6a2 2 0 0 1 2-2h9.05c.64 0 1.24.31 1.62.83L21 12l-4.33 6.57c-.38.52-.98.83-1.62.83H6a2 2 0 0 1-2-2z"/><circle cx="8.3" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>標籤</span>，打上你自己的叫法，例如「阿姨家」，然後存起來。</li>
+        <li>輕觸 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V3.9h10.9l3.6 4.75-3.6 4.75H6"/></svg>標籤</span>，打上你自己的叫法，例如「阿姨家」，然後存起來。</li>
       </ol>
 
       <div class="iconbox">
         <p class="iconbox__k">認這個圖示就對了</p>
         <div class="iconrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.6a2 2 0 0 1 2-2h9.05c.64 0 1.24.31 1.62.83L21 12l-4.33 6.57c-.38.52-.98.83-1.62.83H6a2 2 0 0 1-2-2z"/><circle cx="8.3" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V3.9h10.9l3.6 4.75-3.6 4.75H6"/></svg>
           <div>
             <b>還沒取名字</b>
             <em>圖示是<b>空心</b>的，下面的字寫「標籤」。卡片上顯示的還是那一長串地址。</em>
           </div>
         </div>
         <div class="iconrow">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 6.6a2 2 0 0 1 2-2h9.05c.64 0 1.24.31 1.62.83L21 12l-4.33 6.57c-.38.52-.98.83-1.62.83H6a2 2 0 0 1-2-2z"/><circle cx="8.3" cy="12" r="1.5" fill="#fff"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.6h11.6l4.2 5.05-4.2 5.05H7v7.3a1 1 0 0 1-2 0z"/></svg>
           <div>
             <b>取好名字了</b>
             <em>圖示變成<b>實心</b>，卡片最上面的名稱會換成<b>你取的那個名字</b>——看到這個就成功了。</em>
@@ -896,7 +897,7 @@ footer .src a{display:inline-block;padding:.62rem 0}
         <div class="langs" role="group" aria-label="選擇語言"><button type="button" data-lang="ja-JP" aria-pressed="true">日文</button><button type="button" data-lang="ko-KR" aria-pressed="false">韓文</button><button type="button" data-lang="en-US" aria-pressed="false">英文</button><button type="button" data-lang="th-TH" aria-pressed="false">泰文</button><button type="button" data-lang="vi-VN" aria-pressed="false">越南文</button></div>
         <label class="speed"><input type="checkbox" id="sayslow"><span>放慢速度（AI 聽不清楚時用）</span></label>
         <div class="sayrow" data-lang="ja-JP">
-          <button type="button" class="saybtn" data-text="お会計は 1,200 円になります。" data-lang="ja-JP" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <button type="button" class="saybtn" data-text="お会計は千二百円になります。" data-lang="ja-JP" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
           <div><b>お会計は 1,200 円になります。</b><em>結帳金額是 1,200 日圓。</em><i>便利商店、餐廳結帳</i></div>
         </div>
         <div class="sayrow" data-lang="ja-JP">
@@ -912,7 +913,7 @@ footer .src a{display:inline-block;padding:.62rem 0}
           <div><b>パスポートを見せていただけますか。</b><em>可以給我看一下護照嗎？</em><i>入境、換錢、免稅店</i></div>
         </div>
         <div class="sayrow" data-lang="ko-KR" hidden>
-          <button type="button" class="saybtn" data-text="결제 금액은 15,000원입니다." data-lang="ko-KR" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <button type="button" class="saybtn" data-text="결제 금액은 만 오천 원입니다." data-lang="ko-KR" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
           <div><b>결제 금액은 15,000원입니다.</b><em>結帳金額是 15,000 韓元。</em><i>便利商店、餐廳結帳</i></div>
         </div>
         <div class="sayrow" data-lang="ko-KR" hidden>
@@ -944,7 +945,7 @@ footer .src a{display:inline-block;padding:.62rem 0}
           <div><b>May I see your passport and boarding pass, please?</b><em>可以給我看護照和登機證嗎？</em><i>機場</i></div>
         </div>
         <div class="sayrow" data-lang="th-TH" hidden>
-          <button type="button" class="saybtn" data-text="ทั้งหมด 250 บาทค่ะ" data-lang="th-TH" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <button type="button" class="saybtn" data-text="ทั้งหมดสองร้อยห้าสิบบาทค่ะ" data-lang="th-TH" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
           <div><b>ทั้งหมด 250 บาทค่ะ</b><em>總共 250 泰銖。</em><i>結帳</i></div>
         </div>
         <div class="sayrow" data-lang="th-TH" hidden>
@@ -960,7 +961,7 @@ footer .src a{display:inline-block;padding:.62rem 0}
           <div><b>ขอดูพาสปอร์ตหน่อยค่ะ</b><em>請給我看一下護照。</em><i>飯店入住</i></div>
         </div>
         <div class="sayrow" data-lang="vi-VN" hidden>
-          <button type="button" class="saybtn" data-text="Tổng cộng là 150 nghìn đồng." data-lang="vi-VN" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <button type="button" class="saybtn" data-text="Tổng cộng là một trăm năm mươi nghìn đồng." data-lang="vi-VN" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
           <div><b>Tổng cộng là 150 nghìn đồng.</b><em>總共 15 萬越南盾。</em><i>結帳</i></div>
         </div>
         <div class="sayrow" data-lang="vi-VN" hidden>
@@ -1081,7 +1082,10 @@ footer .src a{display:inline-block;padding:.62rem 0}
     giveUp();
   })();
 
-  /* --- 朗讀外語（用裝置內建語音，不需網路） --- */
+  /* --- 朗讀外語（用裝置內建語音，不需網路）------------------------------
+     發音正確性優先：找不到「該語言本身」的語音時，寧可不出聲，也不讓
+     系統拿中文或英文的聲音去硬唸外語（那唸出來一定是錯的）。
+  --------------------------------------------------------------------- */
   (function(){
     var synth = window.speechSynthesis;
     var langs = Array.prototype.slice.call(document.querySelectorAll('.langs button'));
@@ -1092,46 +1096,68 @@ footer .src a{display:inline-block;padding:.62rem 0}
     if (!langs.length || !note) { return; }
     var current = null;
 
+    var NAME = { 'ja-JP':'日文', 'ko-KR':'韓文', 'en-US':'英文', 'th-TH':'泰文', 'vi-VN':'越南文' };
+    var HOWTO = 'iPhone：設定 › 輔助使用 › 朗讀內容 › 語音；Android：設定 › 語言與輸入 › 文字轉語音；' +
+                'Windows：設定 › 時間與語言 › 語言 › 新增語言；Mac：系統設定 › 輔助使用 › 朗讀內容 › 系統語音。';
+
+    function norm(l){ return (l || '').replace(/_/g, '-').toLowerCase(); }
+
     function stop(){
       if (synth) { try { synth.cancel(); } catch (e) {} }
       btns.forEach(function(b){ b.classList.remove('is-on'); });
       current = null;
     }
 
+    /* 只接受「同一個語言」的語音：先找完全相符的地區，再找同語言的其他地區。
+       都沒有就回 null——絕不退回系統預設語音。 */
     function voiceFor(lang){
       if (!synth || !synth.getVoices) { return null; }
       var vs = synth.getVoices() || [];
-      var base = lang.split('-')[0].toLowerCase();
-      var exact = null, loose = null;
+      var want = norm(lang), base = want.split('-')[0];
+      var exact = [], same = [];
       vs.forEach(function(v){
-        var L = (v.lang || '').replace('_', '-').toLowerCase();
-        if (!exact && L === lang.toLowerCase()) { exact = v; }
-        if (!loose && L.indexOf(base) === 0) { loose = v; }
+        var L = norm(v.lang);
+        if (!L) { return; }
+        if (L === want) { exact.push(v); }
+        else if (L === base || L.indexOf(base + '-') === 0) { same.push(v); }
       });
-      return exact || loose;
+      var pool = exact.length ? exact : same;
+      if (!pool.length) { return null; }
+      var local = pool.filter(function(v){ return v.localService; });   /* 本機語音較穩、不需網路 */
+      return (local.length ? local : pool)[0];
+    }
+
+    function setNote(warn, html){
+      note.className = warn ? 'saynote is-warn' : 'saynote';
+      note.innerHTML = html;
     }
 
     function checkVoices(){
       if (!synth) {
-        note.className = 'saynote is-warn';
-        note.innerHTML = '這台裝置的瀏覽器<b>不支援朗讀</b>。請改用電腦上的 Chrome 或 Safari 開這一頁。';
+        setNote(true, '這台裝置的瀏覽器<b>不支援朗讀</b>。請改用電腦上的 Chrome 或 Safari 開這一頁。');
+        btns.forEach(function(b){ b.disabled = true; });
         return;
       }
       var missing = [];
       langs.forEach(function(b){
-        var ok = !!voiceFor(b.getAttribute('data-lang'));
+        var lang = b.getAttribute('data-lang');
+        var ok = !!voiceFor(lang);
         b.setAttribute('data-missing', ok ? '0' : '1');
-        if (!ok) { missing.push(b.textContent); }
+        b.title = ok ? '' : '這台裝置沒有裝' + (NAME[lang] || '') + '語音';
+        if (!ok) { missing.push(NAME[lang] || b.textContent); }
+      });
+      btns.forEach(function(b){
+        var ok = !!voiceFor(b.getAttribute('data-lang'));
+        b.disabled = !ok;
+        b.setAttribute('aria-disabled', ok ? 'false' : 'true');
       });
       if (missing.length === langs.length) {
-        note.className = 'saynote is-warn';
-        note.innerHTML = '這台裝置目前<b>抓不到任何語音</b>。多數電腦的 Chrome 或 Safari 都可以，手機也可以；如果剛開啟頁面，等一兩秒再按一次試試。';
+        setNote(true, '這台裝置目前<b>抓不到任何語音</b>。剛開頁面的話等一兩秒再試；仍然沒有就要先裝語音：' + HOWTO);
       } else if (missing.length) {
-        note.className = 'saynote is-warn';
-        note.innerHTML = '這台裝置沒有裝 <b>' + missing.join('、') + '</b> 的語音，按了不會有聲音；其他語言正常。開課前請先每個語言各按一次確認。';
+        setNote(true, '這台裝置<b>沒有裝 ' + missing.join('、') + ' 的語音</b>，那幾顆播放鍵已經停用——' +
+                      '沒有正確的語音硬唸出來會是錯的發音。要用的話請先裝：' + HOWTO);
       } else {
-        note.className = 'saynote';
-        note.innerHTML = '五種語言都試得出聲音。這裡用的是<b>你這台裝置內建的語音</b>，不需要網路。';
+        setNote(false, '五種語言都有正確的語音。這裡用的是<b>你這台裝置內建的語音</b>，不需要網路。');
       }
     }
 
@@ -1150,13 +1176,25 @@ footer .src a{display:inline-block;padding:.62rem 0}
         if (current === b) { stop(); return; }
         stop();
         if (!synth) { checkVoices(); return; }
+        var lang = b.getAttribute('data-lang');
+        var v = voiceFor(lang);
+        if (!v) {                                   /* 沒有該語言的語音就不唸 */
+          checkVoices();
+          setNote(true, '這台裝置<b>沒有裝' + (NAME[lang] || '') + '語音</b>，所以這一句不播——' +
+                        '用別的語言的聲音唸出來會是錯的。先裝語音：' + HOWTO);
+          return;
+        }
         var u = new SpeechSynthesisUtterance(b.getAttribute('data-text'));
-        u.lang = b.getAttribute('data-lang');
-        var v = voiceFor(u.lang);
-        if (v) { u.voice = v; }
-        u.rate = (slow && slow.checked) ? 0.65 : 0.95;
+        try { u.voice = v; } catch (e) {}           /* 極少數瀏覽器不給指定，退回只設 lang */
+        u.lang  = v.lang || lang;                   /* 跟著選到的語音走，兩邊一定一致 */
+        u.rate  = (slow && slow.checked) ? 0.7 : 0.95;
+        u.pitch = 1;
         u.onend = stop;
-        u.onerror = stop;
+        u.onerror = function(){
+          stop();
+          setNote(true, '這一句<b>播放失敗</b>了。再按一次；還是不行就是這台裝置的' +
+                        (NAME[lang] || '') + '語音有問題。');
+        };
         b.classList.add('is-on');
         current = b;
         try { synth.speak(u); } catch (e) { stop(); }
@@ -1167,6 +1205,7 @@ footer .src a{display:inline-block;padding:.62rem 0}
     if (synth) {
       if ('onvoiceschanged' in synth) { synth.onvoiceschanged = checkVoices; }
       setTimeout(checkVoices, 900);
+      setTimeout(checkVoices, 2500);
       window.addEventListener('beforeunload', stop);
     }
   })();
