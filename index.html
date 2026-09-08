@@ -49,10 +49,13 @@ p{margin:0} ol,ul{margin:0;padding:0} a{color:inherit}
   color:var(--ink-3);display:flex;align-items:center;gap:.7rem}
 .eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
 h1{font-size:clamp(1.85rem,6.6vw,2.85rem);margin:.65rem 0 .35rem;letter-spacing:-.025em}
-.subtitle{font-size:clamp(1.02rem,3.4vw,1.3rem);font-weight:700;color:var(--save);
-  letter-spacing:-.01em;line-height:1.5;display:flex;align-items:baseline;gap:.55rem}
-.subtitle::before{content:"";flex:none;align-self:center;width:.55rem;height:.55rem;
-  border-radius:52% 52% 52% 2px;transform:rotate(-45deg);background:var(--save)}
+.agenda{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-top:.15rem}
+.agenda li{display:flex;align-items:center;gap:.6rem;font-size:clamp(1rem,3.3vw,1.26rem);
+  font-weight:700;color:var(--save);letter-spacing:-.01em;line-height:1.45}
+.agenda span{flex:none;width:1.55rem;height:1.55rem;border-radius:50%;background:var(--save);color:#fff;
+  display:grid;place-items:center;font-size:.82rem;font-weight:700}
+.agenda li:nth-child(2){color:var(--extra)}
+.agenda li:nth-child(2) span{background:var(--extra)}
 .lede{color:var(--ink-2);font-size:1.02rem;max-width:32rem;margin-top:.7rem}
 .legend{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
 .legend li{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--rule);
@@ -173,6 +176,11 @@ main{padding:2.2rem 0 1rem}
 .video__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 .video__cap{margin-top:.55rem;font-size:.86rem;color:var(--ink-3);line-height:1.65}
 .video__cap b{color:var(--ink-2)}
+.video--bad{background:var(--bad-bg);border:1px solid #F5C8D4;border-radius:.9rem;padding:.95rem}
+.video__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bad);margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
+.video__k::before{content:"✗";font-size:1.1em;line-height:1}
+.video--bad .video__frame{border-color:#F3C2CE;background:#fff}
 .video__cap a{color:var(--save);font-weight:700;text-underline-offset:3px}
 .ui{display:inline-block;font-weight:700;font-size:.95em;padding:.1em .5em;border-radius:.45em;
   background:var(--accent-bg);color:var(--accent);white-space:nowrap}
@@ -239,6 +247,40 @@ main{padding:2.2rem 0 1rem}
   color:#fff;display:grid;place-items:center;font-size:.8rem;line-height:1;font-family:var(--f-num)}
 .stuck__q>b{display:block;font-size:.95rem;line-height:1.55}
 .stuck__q span b{display:inline;font-weight:700;color:var(--ink)}
+
+/* ---------- 部分標題 ---------- */
+.p2{padding:.5rem 0 1rem}
+.part{background:var(--extra-bg);border-radius:1.1rem;padding:1.5rem 1.4rem;margin:2.6rem 0 2.2rem}
+.part__n{font-family:var(--f-num);font-size:.74rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--extra)}
+.part h2{font-size:clamp(1.5rem,5.2vw,2rem);margin:.3rem 0 .5rem}
+.part p{color:var(--ink-2);font-size:.98rem;line-height:1.75;max-width:34rem}
+
+/* ---------- 朗讀 ---------- */
+.say{display:flex;flex-direction:column;gap:.9rem}
+.langs{display:flex;flex-wrap:wrap;gap:.4rem}
+.langs button{font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;color:var(--ink-2);
+  background:var(--paper-2);border:1px solid var(--rule);border-radius:.6rem;padding:.4rem .85rem}
+.langs button[aria-pressed="true"]{background:var(--accent);border-color:transparent;color:#fff}
+.langs button[data-missing="1"]{opacity:.55}
+.sayrow{display:flex;align-items:flex-start;gap:.8rem;padding:.75rem 0;border-top:1px solid var(--rule-soft)}
+.sayrow:first-of-type{border-top:0}
+.sayrow[hidden]{display:none}
+.saybtn{flex:none;width:2.6rem;height:2.6rem;border-radius:50%;border:0;cursor:pointer;
+  background:var(--accent);color:#fff;display:grid;place-items:center;font-size:.85rem;
+  box-shadow:0 4px 10px -4px var(--accent)}
+.saybtn.is-on{background:var(--bad);box-shadow:0 4px 10px -4px var(--bad)}
+.saybtn svg{width:1.05rem;height:1.05rem;fill:currentColor}
+.sayrow>div{min-width:0}
+.sayrow b{display:block;font-size:1.02rem;line-height:1.6;letter-spacing:0}
+.sayrow em{font-style:normal;display:block;font-size:.9rem;color:var(--ink-2);line-height:1.65;margin-top:.15rem}
+.sayrow i{font-style:normal;display:block;font-size:.78rem;color:var(--ink-3);margin-top:.2rem}
+.saynote{font-size:.87rem;line-height:1.7;color:var(--ink-2);background:var(--paper-2);
+  border-radius:.7rem;padding:.7rem .9rem}
+.saynote b{color:var(--ink)}
+.saynote.is-warn{background:var(--bad-bg);color:var(--ink-2)}
+.speed{display:inline-flex;align-items:center;gap:.45rem;font-size:.87rem;color:var(--ink-2);cursor:pointer}
+.speed input{accent-color:var(--accent);width:1.1rem;height:1.1rem;cursor:pointer}
 .stuck__q span{display:block;font-size:.89rem;color:var(--ink-2);line-height:1.7;margin-top:.12rem}
 footer{border-top:1px solid var(--rule);background:var(--paper-2);padding:1.8rem 0 3rem;color:var(--ink-3);font-size:.85rem;line-height:1.75}
 footer a{color:var(--ink-2);text-underline-offset:3px}
@@ -253,7 +295,10 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
   <div class="wrap">
     <p class="eyebrow">課堂講義</p>
     <h1>淺談：如何善用科技（AI）</h1>
-    <p class="subtitle">Google Map 開荒，位置不忘記</p>
+    <ol class="agenda">
+      <li><span>一</span>Google Map 開荒，位置不忘記</li>
+      <li><span>二</span>AI 溝通翻譯沒問題</li>
+    </ol>
     <p class="lede">到一個不熟的地方，把想去的店、住的地方、停車的位置存進 Google 地圖，回家以後、明年再去，都還叫得出來。</p>
     <ul class="legend">
       <li><span class="dot dot--save"></span>清單：把地點收進資料夾</li>
@@ -292,7 +337,7 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
 <section class="unit unit--prep" id="u0">
   <div class="pin"><span>0</span></div>
   <p class="unit__kicker">先做這三件事</p>
-  <h2>開課前的暖身</h2>
+  <h2>開始前準備</h2>
   <p class="unit__why">沒登入帳號，今天存的東西換手機就不見了。先把這三件事確認好，後面才存得住。</p>
 
   <div class="stack">
@@ -396,6 +441,17 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         </li>
       </ol>
 
+      <div class="video video--bad">
+        <p class="video__k">點擊錯誤示範</p>
+        <div class="video__frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/gIpYMHH2X3A?rel=0"
+                  title="點擊錯誤示範"
+                  loading="lazy" allowfullscreen
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <p class="video__cap">看不到播放器的話，<a href="https://www.youtube.com/watch?v=gIpYMHH2X3A" target="_blank" rel="noopener">在 YouTube 開啟</a>。</p>
+      </div>
     </div>
 
         <div class="stuck">
@@ -796,9 +852,175 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
 
 </div>
 
+
+<div class="wrap p2">
+
+<div class="part">
+  <p class="part__n">第二部分</p>
+  <h2>AI 溝通翻譯沒問題</h2>
+  <p>出國最怕的不是迷路，是聽不懂、講不通。手機裡的 AI 可以當你的隨身翻譯，而且兩個方向都行——你講中文讓它說外語，對方講外語讓它翻成中文。</p>
+</div>
+
+<!-- ============ 6 ============ -->
+<section class="unit unit--extra" id="u6">
+  <div class="pin"><span>6</span></div>
+  <p class="unit__kicker">方向一</p>
+  <h2>你說中文，AI 幫你講外語</h2>
+  <p class="unit__why">不用先想怎麼講，直接用中文說出你要表達的事，讓 AI 唸給對方聽。手機拿給對方看螢幕也可以。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>怎麼做</h3>
+      <ol class="steps">
+        <li>打開手機上的 AI 助理，切到<b>語音模式</b>。
+          <span class="see">畫面上會出現一個<b>麥克風或聲波的圖示</b>，點下去就開始聽你說話。</span>
+        </li>
+        <li>先交代它要做什麼：「<b>接下來我說中文，你翻成日文唸出來。</b>」
+          <span class="see">這句話只要講一次，後面它就會一直照做。</span>
+        </li>
+        <li>接著就用平常的中文講你要說的事。</li>
+        <li>把手機音量開大，讓對方聽得到。
+          <span class="see">吵雜的地方就<b>把螢幕拿給對方看</b>，文字也會同時顯示出來。</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>現場可以拿來練的句子</h3>
+      <p class="hint" style="margin:-.4rem 0 .9rem">照著唸就好，都是出國最常用到的。</p>
+      <div class="say">
+        <div class="sayrow"><div><b>請問最近的地鐵站怎麼走？</b><i>問路</i></div></div>
+        <div class="sayrow"><div><b>這個不要辣，謝謝。</b><i>點餐</i></div></div>
+        <div class="sayrow"><div><b>這個多少錢？可以刷卡嗎？</b><i>購物</i></div></div>
+        <div class="sayrow"><div><b>我想寄放行李，可以嗎？</b><i>飯店、車站</i></div></div>
+        <div class="sayrow"><div><b>這附近有可以充電的地方嗎？</b><i>手機沒電</i></div></div>
+        <div class="sayrow"><div><b>我不吃牛肉，可以換別的嗎？</b><i>餐廳</i></div></div>
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會讓 AI 幫我說外語了</span></label>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="unit unit--label" id="u7">
+  <div class="pin"><span>7</span></div>
+  <p class="unit__kicker">方向二</p>
+  <h2>對方說外語，AI 幫你翻成中文</h2>
+  <p class="unit__why">這個方向更重要——聽不懂的時候，把手機拿出來，讓它幫你聽、幫你翻。下面每一句都可以<b>按播放</b>，當作對方在跟你說話，現場就能試一次。</p>
+
+  <div class="stack">
+    <div class="card">
+      <h3>怎麼做</h3>
+      <ol class="steps">
+        <li>打開 AI 助理的<b>語音模式</b>。</li>
+        <li>先交代：「<b>接下來你聽到的話，請翻成中文告訴我。</b>」</li>
+        <li>把手機朝向對方，讓它聽對方說話。
+          <span class="see">它會先把聽到的原文顯示出來，再翻成中文唸給你聽。</span>
+        </li>
+        <li>聽不清楚就請它再說一次，或直接看螢幕上的文字。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>按播放，當作對方正在說話</h3>
+      <p class="hint" style="margin:-.4rem 0 .9rem">先選語言，再按左邊的播放鍵。把手機的 AI 打開放在旁邊，讓它聽這個聲音。</p>
+      <div class="say">
+        <div class="langs" role="group" aria-label="選擇語言"><button type="button" data-lang="ja-JP" aria-pressed="true">日文</button><button type="button" data-lang="ko-KR" aria-pressed="false">韓文</button><button type="button" data-lang="en-US" aria-pressed="false">英文</button><button type="button" data-lang="th-TH" aria-pressed="false">泰文</button><button type="button" data-lang="vi-VN" aria-pressed="false">越南文</button></div>
+        <label class="speed"><input type="checkbox" id="sayslow"><span>放慢速度（AI 聽不清楚時用）</span></label>
+        <div class="sayrow" data-lang="ja-JP">
+          <button type="button" class="saybtn" data-text="お会計は 1,200 円になります。" data-lang="ja-JP" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>お会計は 1,200 円になります。</b><em>結帳金額是 1,200 日圓。</em><i>便利商店、餐廳結帳</i></div>
+        </div>
+        <div class="sayrow" data-lang="ja-JP">
+          <button type="button" class="saybtn" data-text="こちらは温めますか？" data-lang="ja-JP" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>こちらは温めますか？</b><em>這個要幫您加熱嗎？</em><i>買便當、超商熟食</i></div>
+        </div>
+        <div class="sayrow" data-lang="ja-JP">
+          <button type="button" class="saybtn" data-text="この電車は次の駅で止まります。" data-lang="ja-JP" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>この電車は次の駅で止まります。</b><em>這班電車下一站會停。</em><i>車站廣播</i></div>
+        </div>
+        <div class="sayrow" data-lang="ja-JP">
+          <button type="button" class="saybtn" data-text="パスポートを見せていただけますか。" data-lang="ja-JP" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>パスポートを見せていただけますか。</b><em>可以給我看一下護照嗎？</em><i>入境、換錢、免稅店</i></div>
+        </div>
+        <div class="sayrow" data-lang="ko-KR" hidden>
+          <button type="button" class="saybtn" data-text="결제 금액은 15,000원입니다." data-lang="ko-KR" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>결제 금액은 15,000원입니다.</b><em>結帳金額是 15,000 韓元。</em><i>便利商店、餐廳結帳</i></div>
+        </div>
+        <div class="sayrow" data-lang="ko-KR" hidden>
+          <button type="button" class="saybtn" data-text="매운 거 괜찮으세요?" data-lang="ko-KR" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>매운 거 괜찮으세요?</b><em>可以吃辣嗎？</em><i>點餐</i></div>
+        </div>
+        <div class="sayrow" data-lang="ko-KR" hidden>
+          <button type="button" class="saybtn" data-text="여기서 오른쪽으로 가시면 지하철역이 있어요." data-lang="ko-KR" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>여기서 오른쪽으로 가시면 지하철역이 있어요.</b><em>從這裡往右走就有地鐵站。</em><i>問路</i></div>
+        </div>
+        <div class="sayrow" data-lang="ko-KR" hidden>
+          <button type="button" class="saybtn" data-text="여권 좀 보여 주시겠어요?" data-lang="ko-KR" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>여권 좀 보여 주시겠어요?</b><em>可以給我看一下護照嗎？</em><i>入境、飯店入住</i></div>
+        </div>
+        <div class="sayrow" data-lang="en-US" hidden>
+          <button type="button" class="saybtn" data-text="Your total is twenty-four dollars and fifty cents." data-lang="en-US" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Your total is twenty-four dollars and fifty cents.</b><em>總共是 24 元 5 角。</em><i>結帳</i></div>
+        </div>
+        <div class="sayrow" data-lang="en-US" hidden>
+          <button type="button" class="saybtn" data-text="Would you like that for here or to go?" data-lang="en-US" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Would you like that for here or to go?</b><em>您要內用還是外帶？</em><i>點餐</i></div>
+        </div>
+        <div class="sayrow" data-lang="en-US" hidden>
+          <button type="button" class="saybtn" data-text="Go straight two blocks, then turn left at the traffic light." data-lang="en-US" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Go straight two blocks, then turn left at the traffic light.</b><em>直走兩個路口，在紅綠燈左轉。</em><i>問路</i></div>
+        </div>
+        <div class="sayrow" data-lang="en-US" hidden>
+          <button type="button" class="saybtn" data-text="May I see your passport and boarding pass, please?" data-lang="en-US" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>May I see your passport and boarding pass, please?</b><em>可以給我看護照和登機證嗎？</em><i>機場</i></div>
+        </div>
+        <div class="sayrow" data-lang="th-TH" hidden>
+          <button type="button" class="saybtn" data-text="ทั้งหมด 250 บาทค่ะ" data-lang="th-TH" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>ทั้งหมด 250 บาทค่ะ</b><em>總共 250 泰銖。</em><i>結帳</i></div>
+        </div>
+        <div class="sayrow" data-lang="th-TH" hidden>
+          <button type="button" class="saybtn" data-text="เผ็ดได้ไหมคะ" data-lang="th-TH" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>เผ็ดได้ไหมคะ</b><em>可以吃辣嗎？</em><i>點餐</i></div>
+        </div>
+        <div class="sayrow" data-lang="th-TH" hidden>
+          <button type="button" class="saybtn" data-text="เดินตรงไปแล้วเลี้ยวขวานะคะ" data-lang="th-TH" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>เดินตรงไปแล้วเลี้ยวขวานะคะ</b><em>直走然後右轉。</em><i>問路</i></div>
+        </div>
+        <div class="sayrow" data-lang="th-TH" hidden>
+          <button type="button" class="saybtn" data-text="ขอดูพาสปอร์ตหน่อยค่ะ" data-lang="th-TH" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>ขอดูพาสปอร์ตหน่อยค่ะ</b><em>請給我看一下護照。</em><i>飯店入住</i></div>
+        </div>
+        <div class="sayrow" data-lang="vi-VN" hidden>
+          <button type="button" class="saybtn" data-text="Tổng cộng là 150 nghìn đồng." data-lang="vi-VN" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Tổng cộng là 150 nghìn đồng.</b><em>總共 15 萬越南盾。</em><i>結帳</i></div>
+        </div>
+        <div class="sayrow" data-lang="vi-VN" hidden>
+          <button type="button" class="saybtn" data-text="Anh chị muốn ăn gì ạ?" data-lang="vi-VN" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Anh chị muốn ăn gì ạ?</b><em>請問要吃什麼？</em><i>點餐</i></div>
+        </div>
+        <div class="sayrow" data-lang="vi-VN" hidden>
+          <button type="button" class="saybtn" data-text="Anh đi thẳng rồi rẽ trái nhé." data-lang="vi-VN" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Anh đi thẳng rồi rẽ trái nhé.</b><em>直走然後左轉。</em><i>問路</i></div>
+        </div>
+        <div class="sayrow" data-lang="vi-VN" hidden>
+          <button type="button" class="saybtn" data-text="Cho tôi xem hộ chiếu của anh nhé." data-lang="vi-VN" aria-label="播放這一句"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.6-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></button>
+          <div><b>Cho tôi xem hộ chiếu của anh nhé.</b><em>請給我看一下護照。</em><i>飯店入住</i></div>
+        </div>
+        <p class="saynote" id="saynote">這一段的聲音是用<b>你這台裝置內建的語音</b>唸出來的，不需要網路。如果某個語言按了沒聲音，代表這台裝置沒裝那個語言的語音。</p>
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會讓 AI 幫我聽外語了</span></label>
+  </div>
+</section>
+
+</div>
+
 <footer>
   <div class="wrap">
-    <p>本頁的操作步驟與按鈕名稱，皆依 Google 地圖官方說明中心的繁體中文版本整理。Google 地圖會不定期改版，實際畫面文字可能與講義略有差異，操作位置通常不變。</p>
+    <p>第一部分的操作步驟與按鈕名稱，皆依 Google 地圖官方說明中心的繁體中文版本整理；Google 地圖會不定期改版，實際畫面文字可能與講義略有差異，操作位置通常不變。<br>第二部分的外語例句是常見的日常說法，朗讀使用你這台裝置內建的語音。</p>
     <p class="src">
       <a href="https://support.google.com/maps/answer/3184808?hl=zh-Hant" target="_blank" rel="noopener">儲存喜愛的地點</a>
       <a href="https://support.google.com/maps/answer/6257830?hl=zh-Hant" target="_blank" rel="noopener">為地點加上私人標籤</a>
@@ -878,6 +1100,96 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
     var url = HANDOUT_URL || (/^https?:$/.test(location.protocol) ? location.href.split('#')[0] : '');
     if (!url) { giveUp(); return; }
     giveUp();
+  })();
+
+  /* --- 朗讀外語（用裝置內建語音，不需網路） --- */
+  (function(){
+    var synth = window.speechSynthesis;
+    var langs = Array.prototype.slice.call(document.querySelectorAll('.langs button'));
+    var rows  = Array.prototype.slice.call(document.querySelectorAll('.sayrow[data-lang]'));
+    var btns  = Array.prototype.slice.call(document.querySelectorAll('.saybtn'));
+    var note  = document.getElementById('saynote');
+    var slow  = document.getElementById('sayslow');
+    if (!langs.length || !note) { return; }
+    var current = null;
+
+    function stop(){
+      if (synth) { try { synth.cancel(); } catch (e) {} }
+      btns.forEach(function(b){ b.classList.remove('is-on'); });
+      current = null;
+    }
+
+    function voiceFor(lang){
+      if (!synth || !synth.getVoices) { return null; }
+      var vs = synth.getVoices() || [];
+      var base = lang.split('-')[0].toLowerCase();
+      var exact = null, loose = null;
+      vs.forEach(function(v){
+        var L = (v.lang || '').replace('_', '-').toLowerCase();
+        if (!exact && L === lang.toLowerCase()) { exact = v; }
+        if (!loose && L.indexOf(base) === 0) { loose = v; }
+      });
+      return exact || loose;
+    }
+
+    function checkVoices(){
+      if (!synth) {
+        note.className = 'saynote is-warn';
+        note.innerHTML = '這台裝置的瀏覽器<b>不支援朗讀</b>。請改用電腦上的 Chrome 或 Safari 開這一頁。';
+        return;
+      }
+      var missing = [];
+      langs.forEach(function(b){
+        var ok = !!voiceFor(b.getAttribute('data-lang'));
+        b.setAttribute('data-missing', ok ? '0' : '1');
+        if (!ok) { missing.push(b.textContent); }
+      });
+      if (missing.length === langs.length) {
+        note.className = 'saynote is-warn';
+        note.innerHTML = '這台裝置目前<b>抓不到任何語音</b>。多數電腦的 Chrome 或 Safari 都可以，手機也可以；如果剛開啟頁面，等一兩秒再按一次試試。';
+      } else if (missing.length) {
+        note.className = 'saynote is-warn';
+        note.innerHTML = '這台裝置沒有裝 <b>' + missing.join('、') + '</b> 的語音，按了不會有聲音；其他語言正常。開課前請先每個語言各按一次確認。';
+      } else {
+        note.className = 'saynote';
+        note.innerHTML = '五種語言都試得出聲音。這裡用的是<b>你這台裝置內建的語音</b>，不需要網路。';
+      }
+    }
+
+    function show(lang){
+      langs.forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+      rows.forEach(function(r){ r.hidden = (r.getAttribute('data-lang') !== lang); });
+      stop();
+    }
+
+    langs.forEach(function(b){
+      b.addEventListener('click', function(){ show(b.getAttribute('data-lang')); });
+    });
+
+    btns.forEach(function(b){
+      b.addEventListener('click', function(){
+        if (current === b) { stop(); return; }
+        stop();
+        if (!synth) { checkVoices(); return; }
+        var u = new SpeechSynthesisUtterance(b.getAttribute('data-text'));
+        u.lang = b.getAttribute('data-lang');
+        var v = voiceFor(u.lang);
+        if (v) { u.voice = v; }
+        u.rate = (slow && slow.checked) ? 0.65 : 0.95;
+        u.onend = stop;
+        u.onerror = stop;
+        b.classList.add('is-on');
+        current = b;
+        try { synth.speak(u); } catch (e) { stop(); }
+      });
+    });
+
+    checkVoices();
+    if (synth) {
+      if ('onvoiceschanged' in synth) { synth.onvoiceschanged = checkVoices; }
+      setTimeout(checkVoices, 900);
+      window.addEventListener('beforeunload', stop);
+    }
   })();
 })();
 </script>
