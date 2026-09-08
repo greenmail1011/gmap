@@ -138,12 +138,6 @@ main{padding:2.2rem 0 1rem}
 .bad .ok b{color:var(--ink)}
 .video{margin-top:.9rem}
 .card .video{margin-top:1.6rem}
-.video--bad{background:var(--bad-bg);border:1px solid #F5C8D4;border-radius:.9rem;padding:.95rem}
-.video__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--bad);margin-bottom:.55rem;display:flex;align-items:center;gap:.4rem}
-.video__k::before{content:"✗";font-size:1.1em;line-height:1}
-.video--bad .video__frame{border-color:#F3C2CE;background:#fff}
-.video--bad .video__cap{color:var(--ink-2)}
 
 /* 儲存圖示 */
 .icn{width:1em;height:1em;flex:none}
@@ -177,7 +171,8 @@ main{padding:2.2rem 0 1rem}
 .video__frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:.8rem;overflow:hidden;
   background:var(--paper-2);border:1px solid var(--rule)}
 .video__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-.video__cap{margin-top:.5rem;font-size:.86rem;color:var(--ink-3);line-height:1.6}
+.video__cap{margin-top:.55rem;font-size:.86rem;color:var(--ink-3);line-height:1.65}
+.video__cap b{color:var(--ink-2)}
 .video__cap a{color:var(--save);font-weight:700;text-underline-offset:3px}
 .ui{display:inline-block;font-weight:700;font-size:.95em;padding:.1em .5em;border-radius:.45em;
   background:var(--accent-bg);color:var(--accent);white-space:nowrap}
@@ -216,10 +211,35 @@ main{padding:2.2rem 0 1rem}
 .faq h3{font-size:.98rem;font-weight:700;margin-bottom:.35rem}
 .faq p{font-size:.93rem;color:var(--ink-2);line-height:1.72}
 .faq .ui{background:var(--paper-2);color:var(--ink)}
-.cheat{display:grid;gap:.6rem;grid-template-columns:1fr}
-@media (min-width:560px){.cheat{grid-template-columns:1fr 1fr}}
-.cheat div{background:var(--surface);border:1px solid var(--rule-soft);border-radius:.85rem;padding:.85rem 1rem;font-size:.93rem;line-height:1.6}
-.cheat b{display:block;font-size:.8rem;font-family:var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.25rem}
+.tasks{display:grid;gap:.7rem;grid-template-columns:1fr}
+@media (min-width:600px){.tasks{grid-template-columns:1fr 1fr}}
+.task{display:flex;align-items:flex-start;gap:.8rem;background:var(--surface);cursor:pointer;
+  border:1px solid var(--rule-soft);border-radius:.9rem;padding:.95rem 1.05rem;box-shadow:var(--shadow);
+  transition:background .15s ease,border-color .15s ease}
+.task input{accent-color:var(--extra);width:1.3rem;height:1.3rem;margin:.1rem 0 0;flex:none;cursor:pointer}
+.task__t{min-width:0}
+.task__t>b{display:block;font-size:.99rem;line-height:1.5}
+.task em b{display:inline;font-weight:700;color:var(--ink)}
+.task em{font-style:normal;display:block;font-size:.89rem;color:var(--ink-2);line-height:1.68;margin-top:.2rem}
+.task i{font-style:normal;display:inline-block;margin-left:.4rem;font-family:var(--f-num);font-size:.72rem;
+  font-weight:700;letter-spacing:.05em;color:var(--extra);background:var(--extra-bg);
+  padding:.1em .45em;border-radius:.35em;white-space:nowrap;vertical-align:.05em}
+.task.is-done{background:var(--extra-bg);border-color:transparent;box-shadow:none}
+.task.is-done .task__t>b{color:var(--extra)}
+.pmeter{display:inline-flex;align-items:center;gap:.4rem;margin-left:.55rem;padding:.1rem .6rem;
+  border-radius:1rem;background:var(--extra-bg);color:var(--extra);font-weight:700;font-size:.86rem}
+.pmeter b{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+
+/* 單元內的「卡住了？」 */
+.stuck{background:var(--accent-bg);border-radius:1rem;padding:1rem 1.15rem;
+  display:flex;flex-direction:column;gap:.75rem}
+.stuck__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.45rem}
+.stuck__k::before{content:"?";width:1.2rem;height:1.2rem;border-radius:50%;background:var(--accent);
+  color:#fff;display:grid;place-items:center;font-size:.8rem;line-height:1;font-family:var(--f-num)}
+.stuck__q>b{display:block;font-size:.95rem;line-height:1.55}
+.stuck__q span b{display:inline;font-weight:700;color:var(--ink)}
+.stuck__q span{display:block;font-size:.89rem;color:var(--ink-2);line-height:1.7;margin-top:.12rem}
 footer{border-top:1px solid var(--rule);background:var(--paper-2);padding:1.8rem 0 3rem;color:var(--ink-3);font-size:.85rem;line-height:1.75}
 footer a{color:var(--ink-2);text-underline-offset:3px}
 footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
@@ -376,21 +396,15 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         </li>
       </ol>
 
-      <div class="video video--bad">
-        <p class="video__k">點擊錯誤示範</p>
-        <div class="video__frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/gIpYMHH2X3A?rel=0"
-                  title="如何在 Google map 上儲存地址"
-                  loading="lazy" allowfullscreen
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        </div>
-        <p class="video__cap">影片來源：〈如何在 Google map 上儲存地址〉／David Lin。<br>
-          看不到播放器的話，<a href="https://www.youtube.com/watch?v=gIpYMHH2X3A" target="_blank" rel="noopener">點這裡在 YouTube 開啟</a>。</p>
-      </div>
     </div>
 
-    <label class="check"><input type="checkbox" data-unit><span>準備好了</span></label>
+        <div class="stuck">
+      <p class="stuck__k">卡住了？</p>
+      <div class="stuck__q"><b>存過的地點通通不見了</b><span>先看右上角是不是自己的大頭貼。換手機、或不小心登入另一個 Google 帳號，清單就會看起來「空的」。登回原本那個帳號，東西就都在。</span></div>
+      <div class="stuck__q"><b>那排按鈕裡沒有我要的那一顆</b><span>手指壓在<b>那排按鈕上面</b>左右撥。那一排裝不下，有幾顆被擠到畫面外，撥一下就會移進來——「標籤」「更多」常常躲在後面。</span></div>
+    </div>
+
+<label class="check"><input type="checkbox" data-unit><span>準備好了</span></label>
   </div>
 </section>
 
@@ -402,6 +416,20 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
   <p class="unit__why">看到喜歡的店、訂好的旅館，當下按一個「儲存」，它就永遠留在你的清單裡。這是最常用、也最不會出錯的一招。</p>
 
   <div class="stack">
+    <div class="card">
+      <h3>先看這段 50 秒的影片</h3>
+      <div class="video">
+        <div class="video__frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/okd-r0kioPY?start=76&amp;end=127&amp;rel=0"
+                  title="Google Maps 儲存地點示範"
+                  loading="lazy" allowfullscreen
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <p class="video__cap">看不到播放器的話，<a href="https://www.youtube.com/watch?v=okd-r0kioPY&amp;t=76s" target="_blank" rel="noopener">在 YouTube 開啟</a>。</p>
+      </div>
+    </div>
+
     <div class="card">
       <h3>怎麼存</h3>
       <ol class="steps">
@@ -474,7 +502,12 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       <p class="hint" style="margin-top:.8rem">一份清單最多可以放 3,000 個地點——一般人一輩子用不完，可以安心存。</p>
     </div>
 
-    <label class="check"><input type="checkbox" data-unit><span>我會存地點了</span></label>
+        <div class="stuck">
+      <p class="stuck__k">卡住了？</p>
+      <div class="stuck__q"><b>那個地方沒有店名，怎麼存？</b><span>用<b>按住</b>：手指壓在地圖上那個位置約一秒，掉下一根圖釘，再輕觸畫面底部就能儲存。民宿門口、停車位都用這招。</span></div>
+    </div>
+
+<label class="check"><input type="checkbox" data-unit><span>我會存地點了</span></label>
   </div>
 </section>
 
@@ -524,7 +557,13 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       </ol>
     </div>
 
-    <label class="check"><input type="checkbox" data-unit><span>我會加標籤了</span></label>
+        <div class="stuck">
+      <p class="stuck__k">卡住了？</p>
+      <div class="stuck__q"><b>找不到「已加上標籤」</b><span>在 <span class="ui">個人中心</span> 那一頁<b>往下捲</b>，它排在「你的清單」附近。第一次用的人常常只看畫面上半部就放棄了。</span></div>
+      <div class="stuck__q"><b>打了標籤的名字，搜尋卻找不到</b><span>兩個原因：一是沒登入同一個帳號；二是名字打錯字。先到 <span class="ui">個人中心</span> › <span class="ui">已加上標籤</span> 確認你當初取的到底叫什麼。</span></div>
+    </div>
+
+<label class="check"><input type="checkbox" data-unit><span>我會加標籤了</span></label>
   </div>
 </section>
 
@@ -607,7 +646,12 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       <p><span class="ui">個人中心</span><span class="sep">›</span><span class="ui">你的清單</span>。想調順序就輕觸 <span class="ui">編輯</span><span class="sep">›</span><span class="ui">自訂清單順序</span>，按住四條線拖動，再存起來。</p>
     </div>
 
-    <label class="check"><input type="checkbox" data-unit><span>我會開清單也會分享了</span></label>
+        <div class="stuck">
+      <p class="stuck__k">卡住了？</p>
+      <div class="stuck__q"><b>清單傳給別人，會被亂改嗎？</b><span>不會。除非你另外開了 <span class="ui">讓其他人編輯這份清單</span>，否則對方只能看。想收回隨時把它關掉就好。</span></div>
+    </div>
+
+<label class="check"><input type="checkbox" data-unit><span>我會開清單也會分享了</span></label>
   </div>
 </section>
 
@@ -707,7 +751,7 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
 <section class="block" id="faq">
   <p class="block__kicker">現場最常被問</p>
   <h2>卡住的時候</h2>
-  <p class="block__sub">照著順序檢查，八成的問題都在這六題裡。</p>
+  <p class="block__sub">照著順序檢查，八成的問題都在這六題裡。各單元裡也標出了對應的那幾題，現場翻到那一段就看得到。</p>
   <div class="faq">
     <div><h3>存過的地點通通不見了</h3><p>先看右上角是不是自己的大頭貼。換手機、或不小心登入另一個 Google 帳號，清單就會看起來「空的」。登回原本那個帳號，東西就都在。</p></div>
     <div><h3>找不到「已加上標籤」</h3><p>在 <span class="ui">個人中心</span> 那一頁<b>往下捲</b>，它排在「你的清單」附近。第一次用的人常常只看畫面上半部就放棄了。</p></div>
@@ -718,15 +762,35 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
   </div>
 </section>
 
-<section class="block" id="home">
-  <p class="block__kicker">回家練習</p>
-  <h2>今天回去做四件事</h2>
-  <p class="block__sub">不做不會記得。四件事加起來十分鐘。</p>
-  <div class="cheat">
-    <div><b>練習一</b>把<b>自己家</b>存到「喜愛的地點」。</div>
-    <div><b>練習二</b>幫<b>常去的醫院或藥局</b>加一個標籤，取自己叫得出來的名字。</div>
-    <div><b>練習三</b>開一份新清單，名字自己取，丟三個想去的地方進去。</div>
-    <div><b>練習四</b>把那份清單用 LINE 傳給一位家人。</div>
+<section class="block" id="practice">
+  <p class="block__kicker">現場練習</p>
+  <h2>換你動手做</h2>
+  <p class="block__sub">四件事，每件一兩分鐘。做完打勾，卡住就舉手。<span class="pmeter">完成 <b id="pcnt">0</b> / <b id="ptot">4</b></span></p>
+  <div class="tasks">
+    <label class="task"><input type="checkbox" data-task>
+      <span class="task__t">
+        <b>一、把自己家存起來</b>
+        <em>搜尋自己家的地址，按 <span class="ui">儲存</span>，選「喜愛的地點」。<i>單元 1</i></em>
+      </span>
+    </label>
+    <label class="task"><input type="checkbox" data-task>
+      <span class="task__t">
+        <b>二、幫這間教室取名字</b>
+        <em>在地圖上<b>按住</b>教室的位置放圖釘，加標籤叫「上課的地方」，再回搜尋列打這五個字，看它跳不跳回來。<i>單元 2</i></em>
+      </span>
+    </label>
+    <label class="task"><input type="checkbox" data-task>
+      <span class="task__t">
+        <b>三、開一份自己的清單</b>
+        <em>名字自己取，丟三個想去的地方進去。<i>單元 3</i></em>
+      </span>
+    </label>
+    <label class="task"><input type="checkbox" data-task>
+      <span class="task__t">
+        <b>四、把清單傳給旁邊的同學</b>
+        <em>用 LINE 或訊息把連結傳過去，請對方點開，確認真的看得到。<i>單元 3</i></em>
+      </span>
+    </label>
   </div>
 </section>
 
@@ -772,6 +836,29 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
   }
   boxes.forEach(function(b){ b.addEventListener('change', refresh); });
   refresh();
+
+  /* --- 現場練習的勾選 --- */
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('input[data-task]'));
+  var pcnt = document.getElementById('pcnt');
+  var ptot = document.getElementById('ptot');
+  if (tasks.length && pcnt && ptot) {
+    var TK = 'gmapcourse.tasks';
+    ptot.textContent = String(tasks.length);
+    var tdone = (get(TK) || '').split(',');
+    tasks.forEach(function(b,i){ if (tdone.indexOf(String(i)) > -1) { b.checked = true; } });
+    function paint(){
+      var d = [];
+      tasks.forEach(function(b,i){
+        var card = b.closest('.task');
+        if (b.checked) { d.push(i); if (card) { card.classList.add('is-done'); } }
+        else if (card) { card.classList.remove('is-done'); }
+      });
+      pcnt.textContent = String(d.length);
+      set(TK, d.join(','));
+    }
+    tasks.forEach(function(b){ b.addEventListener('change', paint); });
+    paint();
+  }
 
   /* --- 講義 QR ---------------------------------------------------------
      ★ 換網址時，把新網址寫在下面這一行；留空會自動抓目前這一頁的網址。
