@@ -219,24 +219,6 @@ main{padding:2.2rem 0 1rem}
 .faq h3{font-size:.98rem;font-weight:700;margin-bottom:.35rem}
 .faq p{font-size:.93rem;color:var(--ink-2);line-height:1.72}
 .faq .ui{background:var(--paper-2);color:var(--ink)}
-.tasks{display:grid;gap:.7rem;grid-template-columns:1fr}
-@media (min-width:600px){.tasks{grid-template-columns:1fr 1fr}}
-.task{display:flex;align-items:flex-start;gap:.8rem;background:var(--surface);cursor:pointer;
-  border:1px solid var(--rule-soft);border-radius:.9rem;padding:.95rem 1.05rem;box-shadow:var(--shadow);
-  transition:background .15s ease,border-color .15s ease}
-.task input{accent-color:var(--extra);width:1.3rem;height:1.3rem;margin:.1rem 0 0;flex:none;cursor:pointer}
-.task__t{min-width:0}
-.task__t>b{display:block;font-size:.99rem;line-height:1.5}
-.task em b{display:inline;font-weight:700;color:var(--ink)}
-.task em{font-style:normal;display:block;font-size:.89rem;color:var(--ink-2);line-height:1.68;margin-top:.2rem}
-.task i{font-style:normal;display:inline-block;margin-left:.4rem;font-family:var(--f-num);font-size:.72rem;
-  font-weight:700;letter-spacing:.05em;color:var(--extra);background:var(--extra-bg);
-  padding:.1em .45em;border-radius:.35em;white-space:nowrap;vertical-align:.05em}
-.task.is-done{background:var(--extra-bg);border-color:transparent;box-shadow:none}
-.task.is-done .task__t>b{color:var(--extra)}
-.pmeter{display:inline-flex;align-items:center;gap:.4rem;margin-left:.55rem;padding:.1rem .6rem;
-  border-radius:1rem;background:var(--extra-bg);color:var(--extra);font-weight:700;font-size:.86rem}
-.pmeter b{font-family:var(--f-num);font-variant-numeric:tabular-nums}
 
 /* 單元內的「卡住了？」 */
 .stuck{background:var(--accent-bg);border-radius:1rem;padding:1rem 1.15rem;
@@ -247,6 +229,22 @@ main{padding:2.2rem 0 1rem}
   color:#fff;display:grid;place-items:center;font-size:.8rem;line-height:1;font-family:var(--f-num)}
 .stuck__q>b{display:block;font-size:.95rem;line-height:1.55}
 .stuck__q span b{display:inline;font-weight:700;color:var(--ink)}
+
+/* 動手做 */
+.doit{background:var(--surface);border:1px solid var(--rule-soft);border-left:5px solid var(--accent);
+  border-radius:.45rem 1rem 1rem .45rem;padding:1rem 1.2rem;box-shadow:var(--shadow)}
+.doit__k{font-family:var(--f-num);font-size:.72rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:.35rem;display:flex;align-items:center;gap:.35rem}
+.doit__k::before{content:"▸";font-size:1.05em;line-height:1}
+.doit>b{display:block;font-size:1.03rem;line-height:1.5}
+.doit>span{display:block;font-size:.92rem;color:var(--ink-2);line-height:1.72;margin-top:.25rem}
+.doit>span b{color:var(--ink)}
+.doit ol{list-style:none;counter-reset:d;margin-top:.55rem;display:flex;flex-direction:column;gap:.4rem}
+.doit li{counter-increment:d;position:relative;padding-left:1.65rem;font-size:.92rem;
+  color:var(--ink-2);line-height:1.72}
+.doit li::before{content:counter(d) ".";position:absolute;left:0;top:0;font-family:var(--f-num);
+  font-weight:700;color:var(--accent)}
+.doit li b{color:var(--ink)}
 
 /* ---------- 部分標題 ---------- */
 .p2{padding:.5rem 0 1rem}
@@ -476,7 +474,8 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       <h3>先看這段 50 秒的影片</h3>
       <div class="video">
         <div class="video__frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/okd-r0kioPY?start=76&amp;end=127&amp;rel=0"
+          <iframe src="https://www.youtube-nocookie.com/embed/okd-r0kioPY?start=76&amp;end=127&amp;rel=0&amp;enablejsapi=1"
+                  data-end="127"
                   title="Google Maps 儲存地點示範"
                   loading="lazy" allowfullscreen
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -558,12 +557,18 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       <p class="hint" style="margin-top:.8rem">一份清單最多可以放 3,000 個地點——一般人一輩子用不完，可以安心存。</p>
     </div>
 
-        <div class="stuck">
+        <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>把自己家存起來</b>
+      <span>搜尋自己家的地址，按 <span class="ui">儲存</span>，選「喜愛的地點」。存好之後圖示會變成<b>實心</b>。</span>
+    </div>
+
+    <div class="stuck">
       <p class="stuck__k">卡住了？</p>
       <div class="stuck__q"><b>那個地方沒有店名，怎麼存？</b><span>用<b>按住</b>：手指壓在地圖上那個位置約一秒，掉下一根圖釘，再輕觸畫面底部就能儲存。民宿門口、停車位都用這招。</span></div>
     </div>
 
-<label class="check"><input type="checkbox" data-unit><span>我會存地點了</span></label>
+<label class="check"><input type="checkbox" data-unit><span>我把自己家存起來了</span></label>
   </div>
 </section>
 
@@ -613,13 +618,23 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       </ol>
     </div>
 
-        <div class="stuck">
+        <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>幫這間教室取名字</b>
+      <ol>
+        <li>在地圖上<b>按住</b>教室的位置，等圖釘掉下來。</li>
+        <li>點畫面底部的地址，按 <span class="ui">標籤</span>，打「上課的地方」。</li>
+        <li>回搜尋列打這五個字，看它跳不跳回來。</li>
+      </ol>
+    </div>
+
+    <div class="stuck">
       <p class="stuck__k">卡住了？</p>
       <div class="stuck__q"><b>找不到「已加上標籤」</b><span>在 <span class="ui">個人中心</span> 那一頁<b>往下捲</b>，它排在「你的清單」附近。第一次用的人常常只看畫面上半部就放棄了。</span></div>
       <div class="stuck__q"><b>打了標籤的名字，搜尋卻找不到</b><span>兩個原因：一是沒登入同一個帳號；二是名字打錯字。先到 <span class="ui">個人中心</span> › <span class="ui">已加上標籤</span> 確認你當初取的到底叫什麼。</span></div>
     </div>
 
-<label class="check"><input type="checkbox" data-unit><span>我會加標籤了</span></label>
+<label class="check"><input type="checkbox" data-unit><span>我幫教室加好標籤了</span></label>
   </div>
 </section>
 
@@ -702,12 +717,21 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       <p><span class="ui">個人中心</span><span class="sep">›</span><span class="ui">你的清單</span>。想調順序就輕觸 <span class="ui">編輯</span><span class="sep">›</span><span class="ui">自訂清單順序</span>，按住四條線拖動，再存起來。</p>
     </div>
 
-        <div class="stuck">
+        <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>開一份清單，傳給旁邊的同學</b>
+      <ol>
+        <li>開一份新清單，名字自己取，丟三個想去的地方進去。</li>
+        <li>用 LINE 或訊息把連結傳給旁邊那位，請他點開，確認真的看得到。</li>
+      </ol>
+    </div>
+
+    <div class="stuck">
       <p class="stuck__k">卡住了？</p>
       <div class="stuck__q"><b>清單傳給別人，會被亂改嗎？</b><span>不會。除非你另外開了 <span class="ui">讓其他人編輯這份清單</span>，否則對方只能看。想收回隨時把它關掉就好。</span></div>
     </div>
 
-<label class="check"><input type="checkbox" data-unit><span>我會開清單也會分享了</span></label>
+<label class="check"><input type="checkbox" data-unit><span>清單開好也傳出去了</span></label>
   </div>
 </section>
 
@@ -762,7 +786,16 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       </ol>
     </div>
 
-    <label class="check"><input type="checkbox" data-unit><span>我會下載離線地圖了</span></label>
+    <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>抓一份離線地圖下來</b>
+      <ol>
+        <li>搜尋「京都市」，把它下載下來（記得用教室的 Wi-Fi）。</li>
+        <li>打開<b>飛航模式</b>，再看一次地圖——還在，就成功了。</li>
+      </ol>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我下載好離線地圖了</span></label>
   </div>
 </section>
 
@@ -796,61 +829,20 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       </ol>
     </div>
 
-    <label class="check"><input type="checkbox" data-unit><span>我會分享位置也會停掉了</span></label>
+    <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>分享位置給旁邊的同學，再停掉</b>
+      <ol>
+        <li>分享你的位置給旁邊那位，時間選最短的。</li>
+        <li>請他確認看得到你，然後<b>馬上按停止</b>。</li>
+      </ol>
+    </div>
+
+    <label class="check"><input type="checkbox" data-unit><span>我會分享，也會停掉了</span></label>
   </div>
 </section>
 
 </main>
-
-<div class="wrap">
-
-<section class="block" id="faq">
-  <p class="block__kicker">現場最常被問</p>
-  <h2>卡住的時候</h2>
-  <p class="block__sub">照著順序檢查，八成的問題都在這六題裡。各單元裡也標出了對應的那幾題，現場翻到那一段就看得到。</p>
-  <div class="faq">
-    <div><h3>存過的地點通通不見了</h3><p>先看右上角是不是自己的大頭貼。換手機、或不小心登入另一個 Google 帳號，清單就會看起來「空的」。登回原本那個帳號，東西就都在。</p></div>
-    <div><h3>找不到「已加上標籤」</h3><p>在 <span class="ui">個人中心</span> 那一頁<b>往下捲</b>，它排在「你的清單」附近。第一次用的人常常只看畫面上半部就放棄了。</p></div>
-    <div><h3>那排按鈕裡沒有我要的那一顆</h3><p>手指壓在<b>那排按鈕上面</b>左右撥。那一排裝不下，有幾顆被擠到畫面外，撥一下就會移進來——「標籤」「更多」常常躲在後面。</p></div>
-    <div><h3>打了標籤的名字，搜尋卻找不到</h3><p>兩個原因：一是沒登入同一個帳號；二是名字打錯字。可以先到 <span class="ui">個人中心</span> › <span class="ui">已加上標籤</span> 確認你當初取的到底叫什麼。</p></div>
-    <div><h3>清單傳給別人，會被亂改嗎？</h3><p>不會。除非你另外開了 <span class="ui">讓其他人編輯這份清單</span>，否則對方只能看。想收回隨時把它關掉就好。</p></div>
-    <div><h3>那個地方沒有店名，怎麼存？</h3><p>用<b>按住</b>：手指壓在地圖上那個位置約一秒，掉下一根圖釘，再輕觸畫面底部就能 <span class="ui ui--ic"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h11a1 1 0 0 1 1 1v17l-6.5-4-6.5 4V4a1 1 0 0 1 1-1z"/></svg>儲存</span> 或加 <span class="ui">標籤</span>。民宿門口、停車位都用這招。</p></div>
-  </div>
-</section>
-
-<section class="block" id="practice">
-  <p class="block__kicker">現場練習</p>
-  <h2>換你動手做</h2>
-  <p class="block__sub">四件事，每件一兩分鐘。做完打勾，卡住就舉手。<span class="pmeter">完成 <b id="pcnt">0</b> / <b id="ptot">4</b></span></p>
-  <div class="tasks">
-    <label class="task"><input type="checkbox" data-task>
-      <span class="task__t">
-        <b>一、把自己家存起來</b>
-        <em>搜尋自己家的地址，按 <span class="ui">儲存</span>，選「喜愛的地點」。<i>單元 1</i></em>
-      </span>
-    </label>
-    <label class="task"><input type="checkbox" data-task>
-      <span class="task__t">
-        <b>二、幫這間教室取名字</b>
-        <em>在地圖上<b>按住</b>教室的位置放圖釘，加標籤叫「上課的地方」，再回搜尋列打這五個字，看它跳不跳回來。<i>單元 2</i></em>
-      </span>
-    </label>
-    <label class="task"><input type="checkbox" data-task>
-      <span class="task__t">
-        <b>三、開一份自己的清單</b>
-        <em>名字自己取，丟三個想去的地方進去。<i>單元 3</i></em>
-      </span>
-    </label>
-    <label class="task"><input type="checkbox" data-task>
-      <span class="task__t">
-        <b>四、把清單傳給旁邊的同學</b>
-        <em>用 LINE 或訊息把連結傳過去，請對方點開，確認真的看得到。<i>單元 3</i></em>
-      </span>
-    </label>
-  </div>
-</section>
-
-</div>
 
 
 <div class="wrap p2">
@@ -896,6 +888,16 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
         <div class="sayrow"><div><b>這附近有可以充電的地方嗎？</b><i>手機沒電</i></div></div>
         <div class="sayrow"><div><b>我不吃牛肉，可以換別的嗎？</b><i>餐廳</i></div></div>
       </div>
+    </div>
+
+    <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>讓 AI 幫你說一句日文</b>
+      <ol>
+        <li>打開語音模式，先交代：「接下來我說中文，你翻成日文唸出來。」</li>
+        <li>接著用中文說：「請問最近的地鐵站怎麼走？」</li>
+        <li>聽它唸出來，音量開大讓旁邊的人也聽到。</li>
+      </ol>
     </div>
 
     <label class="check"><input type="checkbox" data-unit><span>我會讓 AI 幫我說外語了</span></label>
@@ -1012,6 +1014,16 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       </div>
     </div>
 
+    <div class="doit">
+      <p class="doit__k">動手做</p>
+      <b>讓 AI 聽一句日文，翻給你聽</b>
+      <ol>
+        <li>把手機的 AI 切到語音模式，交代它：「接下來你聽到的話，請翻成中文告訴我。」</li>
+        <li>把手機放在電腦喇叭旁邊，按上面任一句日文的<b>播放鍵</b>。</li>
+        <li>看它翻成什麼——這就是你在日本會遇到的情況。</li>
+      </ol>
+    </div>
+
     <label class="check"><input type="checkbox" data-unit><span>我會讓 AI 幫我聽外語了</span></label>
   </div>
 </section>
@@ -1059,28 +1071,6 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
   boxes.forEach(function(b){ b.addEventListener('change', refresh); });
   refresh();
 
-  /* --- 現場練習的勾選 --- */
-  var tasks = Array.prototype.slice.call(document.querySelectorAll('input[data-task]'));
-  var pcnt = document.getElementById('pcnt');
-  var ptot = document.getElementById('ptot');
-  if (tasks.length && pcnt && ptot) {
-    var TK = 'gmapcourse.tasks';
-    ptot.textContent = String(tasks.length);
-    var tdone = (get(TK) || '').split(',');
-    tasks.forEach(function(b,i){ if (tdone.indexOf(String(i)) > -1) { b.checked = true; } });
-    function paint(){
-      var d = [];
-      tasks.forEach(function(b,i){
-        var card = b.closest('.task');
-        if (b.checked) { d.push(i); if (card) { card.classList.add('is-done'); } }
-        else if (card) { card.classList.remove('is-done'); }
-      });
-      pcnt.textContent = String(d.length);
-      set(TK, d.join(','));
-    }
-    tasks.forEach(function(b){ b.addEventListener('change', paint); });
-    paint();
-  }
 
   /* --- 講義 QR ---------------------------------------------------------
      ★ 換網址時，把新網址寫在下面這一行；留空會自動抓目前這一頁的網址。
@@ -1190,6 +1180,51 @@ footer .src{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.3rem .9rem}
       setTimeout(checkVoices, 900);
       window.addEventListener('beforeunload', stop);
     }
+  })();
+
+  /* --- 影片播到指定秒數自動停（end 參數的保險） --- */
+  (function(){
+    var frames = Array.prototype.slice.call(document.querySelectorAll('iframe[data-end]'));
+    if (!frames.length) { return; }
+    var watched = frames.map(function(f){
+      return { el: f, end: parseFloat(f.getAttribute('data-end')) || 0, done: false };
+    });
+
+    function ping(){
+      watched.forEach(function(w){
+        try {
+          w.el.contentWindow.postMessage(
+            JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*');
+        } catch (e) {}
+      });
+    }
+
+    window.addEventListener('message', function(e){
+      var o = e.origin || '';
+      if (o.indexOf('youtube.com') === -1 && o.indexOf('youtube-nocookie.com') === -1) { return; }
+      var d;
+      try { d = (typeof e.data === 'string') ? JSON.parse(e.data) : e.data; } catch (err) { return; }
+      if (!d || d.event !== 'infoDelivery' || !d.info) { return; }
+      var t = d.info.currentTime;
+      if (typeof t !== 'number') { return; }
+      watched.forEach(function(w){
+        if (!w.end || w.el.contentWindow !== e.source) { return; }
+        if (t >= w.end) {
+          if (!w.done) {
+            w.done = true;
+            try {
+              w.el.contentWindow.postMessage(
+                JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*');
+            } catch (err) {}
+          }
+        } else if (t < w.end - 1.5) {
+          w.done = false;   /* 使用者自己拉回去重看時，重新武裝 */
+        }
+      });
+    });
+
+    ping();
+    setInterval(ping, 1000);
   })();
 })();
 </script>
